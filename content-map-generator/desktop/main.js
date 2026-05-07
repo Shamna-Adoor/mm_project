@@ -45,7 +45,24 @@ function createWindow() {
     },
   })
 
-  win.loadURL(`http://127.0.0.1:${PORT}`)
+  // Prefer Vite dev server if running, otherwise use production build
+  const devUrl = 'http://localhost:5173'
+  const prodUrl = `http://127.0.0.1:${PORT}`
+
+  function loadApp(url) {
+    console.log('[main] Loading:', url)
+    win.loadURL(url)
+  }
+
+  http.get(devUrl, res => {
+    if (res.statusCode === 200) loadApp(devUrl)
+    else loadApp(prodUrl)
+  }).on('error', () => loadApp(prodUrl))
+
+  win.webContents.on('console-message', (_ev, level, msg, line, sourceId) => {
+    console.log(`[renderer:${level}] ${msg} (${sourceId}:${line})`)
+  })
+
   win.on('closed', () => { win = null })
 
   // Open external links in the system browser
@@ -57,8 +74,6 @@ function createWindow() {
 
 // ── App lifecycle ─────────────────────────────────────────────────────────────
 app.whenReady().then(() => {
-  startServer()
-
   // Show a loading window while the server warms up
   win = new BrowserWindow({ width: 480, height: 280, frame: false, resizable: false })
   win.loadURL(`data:text/html,
@@ -70,9 +85,19 @@ app.whenReady().then(() => {
       </div>
     </body>`)
 
-  waitForServer(() => {
-    if (win) win.close()
-    createWindow()
+  // Check if server is already running; if not, start one
+  http.get(`http://127.0.0.1:${PORT}/api/health`, res => {
+    if (res.statusCode === 200) {
+      // Server already running externally
+      if (win) win.close()
+      createWindow()
+    } else {
+      startServer()
+      waitForServer(() => { if (win) win.close(); createWindow() })
+    }
+  }).on('error', () => {
+    startServer()
+    waitForServer(() => { if (win) win.close(); createWindow() })
   })
 })
 

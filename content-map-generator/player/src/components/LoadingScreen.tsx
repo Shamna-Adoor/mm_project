@@ -35,16 +35,16 @@ async function fetchFunFact(): Promise<string> {
 }
 
 /* ── Stage icons & labels ──────────────────────────────────────────────── */
-const STAGE_META: Record<number, { icon: string; label: string }> = {
-  1: { icon: '🎵', label: 'Extracting audio' },
-  2: { icon: '🗣️', label: 'Transcribing speech with AI' },
-  3: { icon: '🔇', label: 'Detecting silence' },
-  4: { icon: '🎼', label: 'Analyzing music' },
-  5: { icon: '🤖', label: 'AI classifying segments' },
-  6: { icon: '🎞️', label: 'Extracting video frames' },
-  7: { icon: '🎬', label: 'Detecting scene changes' },
-  8: { icon: '🔍', label: 'OCR on video frames' },
-  9: { icon: '🧩', label: 'Fusing all signals' },
+const STAGE_META: Record<number, { icon: string; label: string; short: string }> = {
+  1: { icon: '🎵', label: 'Extracting audio',             short: 'Audio' },
+  2: { icon: '🗣️', label: 'Transcribing speech with AI', short: 'Transcribe' },
+  3: { icon: '🔇', label: 'Detecting silence',            short: 'Silence' },
+  4: { icon: '🎼', label: 'Analyzing music',              short: 'Music' },
+  5: { icon: '🤖', label: 'AI classifying segments',      short: 'Classify' },
+  6: { icon: '🎞️', label: 'Extracting video frames',     short: 'Frames' },
+  7: { icon: '🎬', label: 'Detecting scene changes',      short: 'Scenes' },
+  8: { icon: '🔍', label: 'OCR on video frames',          short: 'OCR' },
+  9: { icon: '🧩', label: 'Fusing all signals',           short: 'Fusion' },
 }
 
 /* ── Hourglass SVG ─────────────────────────────────────────────────────── */
@@ -176,20 +176,19 @@ function FactCard({ fact, countdown }: { fact: string; countdown: number }) {
   return (
     <div
       key={fact}
-      className="fact-card w-full max-w-md rounded-xl p-4 text-left"
+      className="fact-card w-full rounded-xl px-4 py-3 text-left"
       style={{
         background: 'linear-gradient(135deg, rgba(30,58,95,0.6), rgba(15,23,42,0.8))',
         border: '1px solid rgba(59,130,246,0.25)',
         boxShadow: '0 0 24px rgba(59,130,246,0.08)',
       }}
     >
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-base">💡</span>
-        <span className="text-xs font-bold uppercase tracking-widest text-blue-400">Did You Know?</span>
+      <div className="flex items-center gap-1.5 mb-1.5">
+        <span className="text-sm">💡</span>
+        <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">Did You Know?</span>
       </div>
-      <p className="text-sm text-slate-200 leading-relaxed">"{fact}"</p>
-      {/* Countdown bar */}
-      <div className="mt-3 h-0.5 rounded-full overflow-hidden" style={{ background: '#1e3a5f' }}>
+      <p className="text-xs text-slate-200 leading-relaxed">"{fact}"</p>
+      <div className="mt-2 h-0.5 rounded-full overflow-hidden" style={{ background: '#1e3a5f' }}>
         <div
           className="h-full rounded-full"
           style={{
@@ -199,7 +198,6 @@ function FactCard({ fact, countdown }: { fact: string; countdown: number }) {
           }}
         />
       </div>
-      <div className="text-xs text-slate-600 mt-1 text-right">next fact in {countdown}s</div>
     </div>
   )
 }
@@ -244,9 +242,10 @@ export default function LoadingScreen({
 
   return (
     <div
-      className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-6 py-8 overflow-y-auto"
+      className="absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 py-8 overflow-y-auto"
       style={{
-        background: 'radial-gradient(ellipse at 50% 30%, rgba(30,58,95,0.5) 0%, rgba(15,23,42,0.98) 70%)',
+        background: 'radial-gradient(ellipse at 50% 30%, #1e3a5f 0%, #0f172a 70%)',
+        zIndex: 10,
       }}
     >
       {/* Grid dot background */}
@@ -260,27 +259,29 @@ export default function LoadingScreen({
 
       {/* Hourglass graphic */}
       <div className="relative flex items-center justify-center" style={{ zIndex: 1 }}>
-        <HourglassSVG pct={percent / 100} />
+        <div className="scale-75">
+          <HourglassSVG pct={percent / 100} />
+        </div>
       </div>
 
       {/* Title */}
-      <div className="text-center" style={{ zIndex: 1 }}>
-        <div className="shimmer-text text-xl font-bold mb-1">Analyzing your video…</div>
+      <div className="text-center -mt-2" style={{ zIndex: 1 }}>
+        <div className="shimmer-text text-lg font-bold mb-0.5">Analyzing your video…</div>
         {videoName && (
           <div className="text-xs text-slate-500 truncate max-w-xs">{videoName}</div>
         )}
       </div>
 
       {/* Stage + progress */}
-      <div className="w-full max-w-md" style={{ zIndex: 1 }}>
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-base">{stage.icon}</span>
-          <span className="text-sm text-slate-300 font-medium">{stage.label}</span>
-          <span className="ml-auto text-xs font-mono text-slate-500">
+      <div className="w-full max-w-sm" style={{ zIndex: 1 }}>
+        <div className="flex items-center gap-2 mb-1.5">
+          <span className="text-sm">{stage.icon}</span>
+          <span className="text-sm text-slate-200 font-medium">{stage.label}</span>
+          <span className="ml-auto text-xs font-mono text-blue-400 font-bold">
             {stageNum}/{totalStages}
           </span>
         </div>
-        <div className="h-2.5 rounded-full overflow-hidden" style={{ background: '#1e293b' }}>
+        <div className="h-2 rounded-full overflow-hidden" style={{ background: '#1e293b' }}>
           <div
             className="h-full rounded-full transition-all duration-700"
             style={{
@@ -290,14 +291,14 @@ export default function LoadingScreen({
             }}
           />
         </div>
-        <div className="flex justify-between text-xs text-slate-600 mt-1">
-          <span className="text-slate-500">{message}</span>
-          <span className="font-mono text-blue-400">{percent}%</span>
+        <div className="flex justify-between text-[11px] mt-1">
+          <span className="text-slate-500 truncate max-w-[70%]">{message}</span>
+          <span className="font-mono text-cyan-400 font-bold">{percent}%</span>
         </div>
       </div>
 
       {/* Stage pills */}
-      <div className="flex flex-wrap justify-center gap-1.5 max-w-sm" style={{ zIndex: 1 }}>
+      <div className="grid grid-cols-3 gap-2 w-full max-w-sm" style={{ zIndex: 1 }}>
         {Object.entries(STAGE_META).map(([n, s]) => {
           const num  = parseInt(n)
           const done = num < stageNum
@@ -305,37 +306,37 @@ export default function LoadingScreen({
           return (
             <div
               key={n}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-xs transition-all ${
-                curr  ? 'bg-blue-900/60 text-blue-300 border border-blue-700/60' :
-                done  ? 'bg-green-900/40 text-green-400 border border-green-800/30' :
-                        'bg-slate-800/40 text-slate-600 border border-slate-800/30'
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all ${
+                curr  ? 'bg-blue-900/60 text-blue-300 border border-blue-500/50 shadow-md shadow-blue-900/30' :
+                done  ? 'bg-green-900/30 text-green-400 border border-green-800/30' :
+                        'bg-slate-800/30 text-slate-600 border border-slate-700/30'
               }`}
             >
-              <span>{done ? '✓' : s.icon}</span>
-              <span className="hidden sm:inline">{s.label.split(' ').slice(0, 2).join(' ')}</span>
+              <span className="text-xs flex-shrink-0">{done ? '✓' : s.icon}</span>
+              <span className="text-[11px] leading-tight">{s.short}</span>
             </div>
           )
         })}
       </div>
 
       {/* Toggle: fact vs game */}
-      <div className="flex items-center gap-2" style={{ zIndex: 1 }}>
+      <div className="flex items-center gap-1.5" style={{ zIndex: 1 }}>
         <button
           onClick={() => setShowGame(false)}
-          className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${!showGame ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+          className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${!showGame ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
         >
           💡 Fun Fact
         </button>
         <button
           onClick={() => setShowGame(true)}
-          className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${showGame ? 'bg-green-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+          className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${showGame ? 'bg-green-600 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
         >
           🎮 Mini Game
         </button>
       </div>
 
       {/* Fun fact card or mini game */}
-      <div className="w-full max-w-md" style={{ zIndex: 1 }}>
+      <div className="w-full max-w-sm" style={{ zIndex: 1 }}>
         {showGame ? (
           <MiniGame />
         ) : fact ? (
@@ -353,7 +354,7 @@ export default function LoadingScreen({
       </div>
 
       {/* Tip */}
-      <p className="text-xs text-slate-600 text-center max-w-sm" style={{ zIndex: 1 }}>
+      <p className="text-[10px] text-slate-600 text-center max-w-sm" style={{ zIndex: 1 }}>
         Keep this window open. Long videos may take 5–15 minutes.
       </p>
     </div>

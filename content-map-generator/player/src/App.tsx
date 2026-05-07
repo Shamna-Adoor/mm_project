@@ -87,6 +87,8 @@ export default function App() {
   const [analyzeUrl, setAnalyzeUrl] = useState(true)
   const [jobId, setJobId] = useState<string | null>(null)
   const [sourceInfo, setSourceInfo] = useState<SourceMetadata | null>(null)
+  const [pendingVideoSrc, setPendingVideoSrc] = useState<string | null>(null)
+  const [showFullLoading, setShowFullLoading] = useState(false)
 
   const contentOnlyRef = useRef(false)
   const segmentMapRef = useRef<SegmentMap | null>(null)
@@ -149,8 +151,11 @@ export default function App() {
     if (!file) return
 
     if (videoSrc?.startsWith('blob:')) URL.revokeObjectURL(videoSrc)
+    if (pendingVideoSrc?.startsWith('blob:')) URL.revokeObjectURL(pendingVideoSrc)
 
-    setVideoSrc(URL.createObjectURL(file))
+    const blobUrl = URL.createObjectURL(file)
+    setPendingVideoSrc(blobUrl)
+    setVideoSrc(null)
     setVideoName(file.name)
     setCurrentTime(0)
     setIsPlaying(false)
@@ -159,6 +164,7 @@ export default function App() {
     setJobId(null)
     setAnalyzeError(null)
     setProgress(null)
+    setShowFullLoading(true)
 
     if (pollRef.current) clearInterval(pollRef.current)
 
@@ -201,6 +207,11 @@ export default function App() {
 
           const result = await (await fetch(`${API}/api/result/${jobId}`)).json()
 
+          setPendingVideoSrc(prev => {
+            if (prev) setVideoSrc(prev)
+            return null
+          })
+
           setSegmentMap({
             video_id: result.video_id ?? jobId,
             duration_seconds: result.duration_seconds ?? 0,
@@ -209,11 +220,17 @@ export default function App() {
             chapters: result.chapters ?? [],
           })
 
+          setShowFullLoading(false)
           setAnalyzing(false)
           setProgress(null)
         } else if (p.status === 'error') {
           clearInterval(pollRef.current!)
+          setPendingVideoSrc(prev => {
+            if (prev) setVideoSrc(prev)
+            return null
+          })
           setAnalyzeError(p.message)
+          setShowFullLoading(false)
           setAnalyzing(false)
           setProgress(null)
         }
@@ -597,7 +614,7 @@ export default function App() {
             ref={videoWrapRef}
             className="relative bg-black flex items-center justify-center flex-1 min-h-0"
           >
-            {videoSrc ? (
+            {videoSrc && !showFullLoading ? (
               <video
                 ref={videoRef}
                 className="max-h-full max-w-full"
@@ -607,25 +624,25 @@ export default function App() {
                 onPause={() => setIsPlaying(false)}
                 onEnded={() => setIsPlaying(false)}
               />
-            ) : (
+            ) : !analyzing && !showFullLoading ? (
               <div className="text-center select-none">
                 <div className="text-6xl mb-4 opacity-20">▶️</div>
                 <div className="text-sm text-slate-500">Load a video to begin</div>
                 <div className="text-xs text-slate-600 mt-1">MP4, MOV, MKV, WebM supported</div>
               </div>
-            )}
+            ) : null}
 
-            {analyzing && !videoSrc && (
+            {showFullLoading && (
               <LoadingScreen
                 message={progress?.message ?? 'Starting…'}
                 stageNum={progress?.stage_num ?? 0}
-                totalStages={progress?.total_stages ?? 9}
+                totalStages={progress?.total_stages ?? 10}
                 percent={progress?.percent ?? 0}
                 videoName={videoName}
               />
             )}
 
-            {analyzing && videoSrc && (
+            {analyzing && videoSrc && !showFullLoading && (
               <div
                 className="absolute left-3 right-3 bottom-3 px-3 py-2 rounded-lg text-xs shadow-2xl"
                 style={{
