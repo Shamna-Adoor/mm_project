@@ -14,7 +14,7 @@ log = get_logger(__name__)
 
 INTERMEDIATE_ROOT = Path(__file__).parent.parent / "data" / "intermediate"
 PREDICTIONS_ROOT  = Path(__file__).parent.parent / "data" / "predictions"
-TOTAL_STAGES      = 10
+TOTAL_STAGES      = 9
 
 
 def run_pipeline(
@@ -74,9 +74,22 @@ def run_pipeline(
 
         # ── Stage 5: Transcript signals ────────────────────────────────────────
         _write_status(status_path, 5, "Finding sponsor and boilerplate phrases…", 64)
-        from analyzer.audio.transcript_signals import find_sponsor_phrases, find_boilerplate
-        sponsors    = find_sponsor_phrases(transcript)
-        boilerplate = find_boilerplate(transcript)
+        from analyzer.audio.transcript_signals import (
+            find_sponsor_phrases, find_boilerplate, find_commercial_clusters,
+        )
+        sponsors            = find_sponsor_phrases(transcript)
+        boilerplate         = find_boilerplate(transcript)
+        commercial_clusters = find_commercial_clusters(transcript)
+
+        # ── Stage 5a: Audio coherence (style-shift detection) ──────────────────
+        # Cheap defensive: never lets a librosa import error break the pipeline.
+        _write_status(status_path, 5, "Analysing audio style shifts…", 65)
+        try:
+            from analyzer.audio.audio_coherence import detect_audio_anomalies
+            audio_anomalies = detect_audio_anomalies(audio_path)
+        except Exception as exc:
+            log.warning("Audio coherence skipped: %s", exc)
+            audio_anomalies = []
 
         audio_signals = {
             "silence_intervals":   silence,
@@ -84,6 +97,8 @@ def run_pipeline(
             "transcript":          transcript,
             "sponsor_phrases":     sponsors,
             "boilerplate_phrases": boilerplate,
+            "commercial_clusters": commercial_clusters,
+            "audio_anomalies":     audio_anomalies,
         }
 
         # ── Stage 5b: LLM non-content classification ──────────────────────────
@@ -96,14 +111,11 @@ def run_pipeline(
         from analyzer.audio.topic_segments import generate_chapters
         chapters = generate_chapters(transcript, duration)
 
-        # ── Stages 6-10: Visual + multimodal analysis ─────────────────────────
+        # ── Stages 6-9: Visual analysis ────────────────────────────────────────
         visual_signals: dict = {
             "scene_changes":    [],
             "static_intervals": [],
             "ocr_detections":   [],
-            "ad_intervals":     [],
-            "intro_interval":   None,
-            "dead_air_multimodal": [],
         }
 
         if not skip_visual:
@@ -111,55 +123,76 @@ def run_pipeline(
             from analyzer.visual.scene_detect    import detect_scenes
             from analyzer.visual.ocr_frames      import ocr_frames
             from analyzer.visual.motion_analysis import detect_static_intervals
-            from analyzer.visual.ad_detect       import detect_ad_intervals
 
             frames_dir = idir / "frames"
 
-            # 0.5 fps (1 frame per 2s) — balances detection accuracy with speed
-            _write_status(status_path, 6, "Extracting video frames…", 68)
-            extract_frames(video_path, frames_dir, fps=0.5, force=force)
+            # 1 frame per 5 s → ~290 frames for a 24-min video (was 1440 at 1 fps)
+            _write_status(status_path, 6, "Extracting video frames…", 71)
+            extract_frames(video_path, frames_dir, fps=0.2, force=force)
 
-            _write_status(status_path, 7, "Detecting scene changes…", 73)
+            _write_status(status_path, 7, "Detecting scene changes…", 75)
             visual_signals["scene_changes"] = detect_scenes(video_path)
 
-            _write_status(status_path, 8, "Running OCR on frames…", 78)
+            # OCR every 10 s on the already-sparse frames
+            _write_status(status_path, 8, "Running OCR on frames…", 82)
             visual_signals["ocr_detections"] = ocr_frames(
                 frames_dir, sample_every_n_seconds=10
             )
 
-            _write_status(status_path, 9, "Detecting static / motion intervals…", 83)
+            _write_status(status_path, 9, "Detecting static / motion intervals…", 90)
             visual_signals["static_intervals"] = detect_static_intervals(frames_dir)
 
-            # ── Stage 10: Multimodal ad + intro + dead-air detection ────────────
-            _write_status(status_path, 10, "Multimodal ad detection (island + transcript)…", 86)
-            from analyzer.multimodal_detect import detect_multimodal_ads, detect_multimodal_dead_air
-            from analyzer.intro_detect import detect_intro
-
-            multimodal_ads = detect_multimodal_ads(
-                audio_path, frames_dir,
-                video_duration=duration,
-                transcript=transcript,
-            )
-
-            if multimodal_ads:
-                visual_signals["ad_intervals"] = multimodal_ads
-                log.info("Multimodal ad detection: %d confirmed interval(s)", len(multimodal_ads))
-            else:
-                # No multimodal ads found — leave ad_intervals empty rather than
-                # using the visual-only fallback which generates too many false positives
-                log.info("Multimodal detection found no confirmed ads")
-
-            _write_status(status_path, 10, "Detecting intro segment…", 91)
-            visual_signals["intro_interval"] = detect_intro(
-                audio_path, frames_dir, video_duration=duration
-            )
-
-            _write_status(status_path, 10, "Multimodal dead-air detection…", 93)
-            visual_signals["dead_air_multimodal"] = detect_multimodal_dead_air(
-                audio_path, frames_dir, video_duration=duration
-            )
+            # ── Stage 9b: Visual coherence (color / style shift) ───────────────
+            # Reuses the frames already extracted; adds ~5–15s on a 30-min video.
+            _write_status(status_path, 9, "Analysing visual style coherence…", 92)
+            try:
+                from analyzer.visual.visual_coherence import detect_visual_anomalies
+                visual_signals["visual_anomalies"] = detect_visual_anomalies(frames_dir)
+            except Exception as exc:
+                log.warning("Visual coherence skipped: %s", exc)
+                visual_signals["visual_anomalies"] = []
         else:
             log.info("Visual analysis skipped (--skip-visual)")
+            visual_signals["visual_anomalies"] = []
+            frames_dir = None  # type: ignore[assignment]
+
+        # ── Stage 9c: Joint-novelty detection (template-free) ─────────────────
+        # The principled "is this region unlike the rest of THIS video?"
+        # detector. Combines audio, color, and structural signals into one
+        # robustly-standardised distance per window. Catches inserted ads
+        # that don't fit any specific template (calm narrative ads, ads in
+        # animation, broadcast spots) by leveraging the fundamental fact
+        # that an inserted ad is, by definition, a passage produced in a
+        # different production environment than the host content.
+        _write_status(status_path, 9, "Computing joint-novelty score…", 94)
+        novelty_regions: list[dict] = []
+        try:
+            from analyzer.joint_novelty import detect_novelty_regions
+            from analyzer.audio.llm_classify import classify_content_type, get_profile_for
+            ct_pre   = classify_content_type(
+                visual_signals.get("scene_changes", []),
+                visual_signals.get("static_intervals", []),
+                duration,
+            )
+            profile_pre = get_profile_for(ct_pre["type"])
+            novelty_k = float(profile_pre.get("novelty_sigmas", 2.5))
+            log.info(
+                "Joint-novelty using k=%.2f (content-type: %s)",
+                novelty_k, ct_pre["type"],
+            )
+            novelty_regions = detect_novelty_regions(
+                audio_path,
+                frames_dir if not skip_visual else None,
+                visual_signals.get("scene_changes", []),
+                audio_signals.get("transcript", []),
+                duration,
+                novelty_sigmas=novelty_k,
+            )
+        except Exception as exc:
+            log.warning("Joint-novelty skipped: %s", exc)
+            novelty_regions = []
+        # Surface novelty in both signal namespaces for caching + diagnostics.
+        audio_signals["novelty_regions"] = novelty_regions
 
         # ── Cache signal JSON ──────────────────────────────────────────────────
         signal_path = idir / "signals.json"
@@ -171,23 +204,40 @@ def run_pipeline(
         _write_status(status_path, 9, "Fusing signals into segments…", 95)
 
         if llm_segments:
-            # LLM succeeded — overlay silence + music + multimodal signals on top
+            # LLM succeeded — overlay silence + music + visual + novelty signals on top
             from analyzer.audio.llm_classify import to_output_segments
             segments = to_output_segments(
                 llm_segments,
                 silence_intervals=audio_signals.get("silence_intervals", []),
                 music_intervals=audio_signals.get("music_intervals", []),
-                ad_intervals=visual_signals.get("ad_intervals", []),
                 video_duration=duration,
-                intro_interval=visual_signals.get("intro_interval"),
-                dead_air_multimodal=visual_signals.get("dead_air_multimodal", []),
+                scene_changes=visual_signals.get("scene_changes", []),
+                transcript=audio_signals.get("transcript", []),
+                static_intervals=visual_signals.get("static_intervals", []),
+                commercial_clusters=audio_signals.get("commercial_clusters", []),
+                audio_anomalies=audio_signals.get("audio_anomalies", []),
+                visual_anomalies=visual_signals.get("visual_anomalies", []),
+                novelty_regions=novelty_regions,
             )
-            log.info("Using LLM+audio+multimodal segments: %d total", len(segments))
+            log.info("Using LLM+audio+visual+novelty segments: %d total", len(segments))
         else:
             # Ollama unavailable — fall back to rule-based fusion
             from analyzer.fusion import classify_segments
-            segments = classify_segments(audio_signals, visual_signals, duration)
+            segments = classify_segments(
+                audio_signals, visual_signals, duration,
+                novelty_regions=novelty_regions,
+            )
             log.info("Using rule-based fusion: %d total", len(segments))
+
+        # Diagnostic content-type tag (purely informational; never affects
+        # which segments are returned). Helpful for tuning thresholds and
+        # understanding what profile the pipeline applied.
+        from analyzer.audio.llm_classify import classify_content_type
+        content_info = classify_content_type(
+            visual_signals.get("scene_changes", []),
+            visual_signals.get("static_intervals", []),
+            duration,
+        )
 
         PREDICTIONS_ROOT.mkdir(parents=True, exist_ok=True)
         out_path = PREDICTIONS_ROOT / f"{vid_id}.json"
@@ -195,6 +245,7 @@ def run_pipeline(
             "video_id":         vid_id,
             "duration_seconds": round(duration, 3),
             "generated_at":     datetime.now(timezone.utc).isoformat(),
+            "content_type":     content_info,
             "segments":         segments,
             "chapters":         chapters,
         }

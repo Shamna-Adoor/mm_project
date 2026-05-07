@@ -15,3 +15,4 @@ build/
 *.mp4
 *.mkv
 *.webm
+.claude/

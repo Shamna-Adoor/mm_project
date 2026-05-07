@@ -16,25 +16,12 @@ export interface Chapter {
   title: string
 }
 
-export interface SourceMetadata {
-  source_url?: string
-  webpage_url?: string
-  playback_url?: string
-  title?: string
-  extractor?: string
-  source_id?: string
-  is_live?: boolean
-  is_stream?: boolean
-  mime_type?: string
-}
-
 export interface SegmentMap {
   video_id: string
   duration_seconds: number
   generated_at: string
   segments: Segment[]
   chapters?: Chapter[]
-  source?: SourceMetadata
 }
 
 export const LABEL_COLORS: Record<SegmentLabel, { bar: string; badge: string; text: string; bg: string }> = {

@@ -36,19 +36,30 @@ def classify_segments(
     video_duration: float,
     *,
     rules_path: str | Path = RULES_PATH,
+    novelty_regions: list[dict] | None = None,
 ) -> list[Segment]:
     """Fuse raw signals into labelled, non-overlapping segments.
 
     Algorithm
     ---------
-    1. Build candidate boundaries from scene changes + silence.
+    1. Build candidate boundaries from scene changes + silence + novelty regions.
     2. Score each candidate segment against every label using weighted rules.
     3. Merge adjacent same-label segments within a configurable gap.
     4. Ensure the full duration [0, video_duration] is covered.
     """
     rules = _load_rules(Path(rules_path))
+    novelty_regions = novelty_regions or []
 
     boundaries = _build_boundaries(audio_signals, visual_signals, rules)
+    # Novelty region boundaries are STRONG cut points — they mark the start
+    # and end of a region whose joint signature differs from the rest of the
+    # video, so they should always become candidate boundary points.
+    for r in novelty_regions:
+        try:
+            boundaries.append(float(r["start"]))
+            boundaries.append(float(r["end"]))
+        except (KeyError, TypeError, ValueError):
+            continue
     boundaries = sorted({0.0, video_duration} | set(boundaries))
 
     raw_segments: list[Segment] = []
@@ -57,7 +68,8 @@ def classify_segments(
         if end - start < 0.5:          # skip slivers
             continue
         label, conf, sigs = _score_segment(
-            start, end, audio_signals, visual_signals, video_duration, rules
+            start, end, audio_signals, visual_signals, video_duration, rules,
+            novelty_regions=novelty_regions,
         )
         raw_segments.append({
             "start":            round(start, 3),
@@ -70,8 +82,78 @@ def classify_segments(
         })
 
     merged = _merge_adjacent(raw_segments, rules["merging"]["max_gap_seconds"])
+
+    # Priority 2 safety net: if the heuristic detectors over-flagged
+    # non-content (e.g., on rapidly edited animation), demote the
+    # lowest-confidence non-content segments back to main_content so we
+    # never hide more of the video than the cap allows.
+    merged = _enforce_non_content_cap(merged, video_duration, rules)
+
     log.info("Fusion produced %d segment(s)", len(merged))
     return merged
+
+
+def _enforce_non_content_cap(
+    segments: list[Segment],
+    video_duration: float,
+    rules: dict,
+) -> list[Segment]:
+    """Demote excess non-content back to main_content based on a global cap.
+
+    Uses the content-type profile to pick the cap percentage. For
+    talking-head videos this is generous (40%) and rarely triggers; for
+    fast-paced animation it's tighter (25%). When triggered, the
+    LOWEST-confidence non-content segments are flipped to main_content first.
+    """
+    if not segments or video_duration <= 0:
+        return segments
+
+    # Lazy-import the helpers to avoid circular imports at module load time.
+    from analyzer.audio.llm_classify import classify_content_type, get_profile_for
+
+    visual_signals = {
+        "scene_changes":    [],   # not directly available here; rule-based
+        "static_intervals": [],   # path doesn't carry these into fusion
+    }
+    # We don't have raw signals at this layer, so fall back to the segment
+    # density itself: if non-content already dominates, default to a tight
+    # animation profile; otherwise use the talking-head defaults.
+    nc_seconds = sum(s["end"] - s["start"] for s in segments if s["label"] in SKIP_LABELS)
+    nc_ratio   = nc_seconds / video_duration
+    profile    = get_profile_for("fast_paced" if nc_ratio > 0.5 else "talking_head")
+    cap_pct    = float(profile["max_non_content_pct"])
+
+    if nc_ratio <= cap_pct:
+        return segments
+
+    # Sort non-content segments by confidence ascending — drop weakest first.
+    nc_indices = [i for i, s in enumerate(segments) if s["label"] in SKIP_LABELS]
+    nc_indices.sort(key=lambda i: segments[i].get("confidence", 0.0))
+
+    cap_seconds = video_duration * cap_pct
+    over = nc_seconds - cap_seconds
+    flipped = 0
+    for i in nc_indices:
+        if over <= 0:
+            break
+        seg = segments[i]
+        dur = seg["end"] - seg["start"]
+        log.info(
+            "Non-content cap engaged: demoting %s [%.1f-%.1f] (conf=%.2f) → main_content",
+            seg["label"], seg["start"], seg["end"], seg.get("confidence", 0.0),
+        )
+        segments[i] = {
+            **seg,
+            "label":            "main_content",
+            "skip_recommended": False,
+            "reason":           "Demoted by non-content cap",
+        }
+        over -= dur
+        flipped += 1
+
+    if flipped:
+        log.info("Demoted %d non-content segment(s) to enforce %.0f%% cap", flipped, cap_pct * 100)
+    return segments
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -89,10 +171,6 @@ def _build_boundaries(audio: dict, visual: dict, rules: dict) -> list[float]:
     for sc in visual.get("scene_changes", []):
         if sc["confidence"] >= sc_weight:
             pts.append(sc["timestamp"])
-
-    for ad in visual.get("ad_intervals", []):
-        pts.append(ad["start"])
-        pts.append(ad["end"])
 
     min_sil = rules["boundaries"]["min_silence_duration"]
     for sil in audio.get("silence_intervals", []):
@@ -115,16 +193,22 @@ def _build_boundaries(audio: dict, visual: dict, rules: dict) -> list[float]:
     for ocr in visual.get("ocr_detections", []):
         pts.append(ocr["timestamp"])
 
-    # Multimodal intro boundary
-    intro_interval = visual.get("intro_interval")
-    if intro_interval:
-        pts.append(intro_interval["start"])
-        pts.append(intro_interval["end"])
-
-    # Multimodal dead-air boundaries
-    for da in visual.get("dead_air_multimodal", []) or []:
-        pts.append(da["start"])
-        pts.append(da["end"])
+    # Treat scene-burst start/end as strong boundary candidates. Threshold
+    # adapts to the video's overall cut density so animated content doesn't
+    # generate spurious boundaries everywhere.
+    burst_cfg = rules.get("scene_burst", {})
+    if burst_cfg and visual.get("scene_changes"):
+        from analyzer.audio.llm_classify import detect_scene_bursts
+        for b in detect_scene_bursts(
+            visual["scene_changes"],
+            window_seconds=float(burst_cfg.get("window_seconds", 30.0)),
+            min_cuts_in_window=int(burst_cfg.get("min_cuts_in_window", 4)),
+            pad_before=float(burst_cfg.get("pad_before", 1.5)),
+            pad_after=float(burst_cfg.get("pad_after", 3.0)),
+            adaptive_baseline=True,
+        ):
+            pts.append(b["start"])
+            pts.append(b["end"])
 
     return pts
 
@@ -136,6 +220,8 @@ def _score_segment(
     visual: dict,
     duration: float,
     rules: dict,
+    *,
+    novelty_regions: list[dict] | None = None,
 ) -> tuple[str, float, list[str]]:
     """Return (label, confidence, signals_used) for a candidate segment."""
     scores: dict[str, float] = {
@@ -149,19 +235,111 @@ def _score_segment(
 
     r = rules["scoring"]
 
-    # ── intro ────────────────────────────────────────────────────────────────
-    # Use tight 15s window if multimodal intro was detected, otherwise fallback
-    intro_interval = visual.get("intro_interval")
-    if intro_interval:
-        # Multimodal intro detected — strongly score segments within it
-        if _overlap(start, end, intro_interval["start"], intro_interval["end"]):
-            scores["intro"] += r["intro"].get("multimodal_intro_weight", 1.5)
-            sigs_fired["intro"].append("multimodal_intro")
-        intro_window = r["intro"]["position_window"]
-    else:
-        intro_window = r["intro"].get("position_window_fallback", r["intro"]["position_window"])
+    # ── Scene-change burst: strong signal of an inserted video ad ─────────────
+    # Threshold and weight both scale with content type. Animation/fast-paced
+    # videos use a higher cuts-per-window floor (so normal editing doesn't
+    # cross the bar) AND a downscaled weight (so any burst that does fire
+    # contributes less, since it's less diagnostic in those contexts).
+    burst_cfg = rules.get("scene_burst", {})
+    burst_weight_scale = 1.0
+    gap_weight_scale   = 1.0
+    if burst_cfg and visual.get("scene_changes"):
+        from analyzer.audio.llm_classify import (
+            classify_content_type,
+            detect_scene_bursts,
+            get_profile_for,
+        )
+        ct = classify_content_type(
+            visual.get("scene_changes", []),
+            visual.get("static_intervals", []),
+            duration,
+        )
+        prof = get_profile_for(ct["type"])
+        burst_weight_scale = float(prof.get("scene_burst_weight", 1.0))
+        gap_weight_scale   = float(prof.get("long_gap_weight",    1.0))
+        bursts = detect_scene_bursts(
+            visual["scene_changes"],
+            window_seconds=float(burst_cfg.get("window_seconds", 30.0)),
+            min_cuts_in_window=int(prof["burst_min_cuts"]),
+            video_duration=duration,
+            pad_before=float(burst_cfg.get("pad_before", 1.5)),
+            pad_after=float(burst_cfg.get("pad_after", 3.0)),
+            baseline_multiplier=float(prof["burst_baseline_mult"]),
+            floor_min_cuts=int(prof["burst_min_cuts"]),
+        )
+        for b in bursts:
+            if _overlap(start, end, b["start"], b["end"]):
+                scores["sponsor"] += (
+                    r["sponsor"].get("scene_burst_weight", 1.0) * burst_weight_scale
+                )
+                sigs_fired["sponsor"].append("scene_change_burst")
+                break
 
-    if start < intro_window:
+    # ── Long mid-video speech gap reinforces sponsor scoring ──────────────────
+    # Weight is content-type scaled so animation action scenes (which have
+    # natural long speech gaps) don't trip the sponsor classifier.
+    gap_cfg = rules.get("speech_gap", {})
+    if gap_cfg and audio.get("transcript"):
+        from analyzer.audio.llm_classify import detect_long_speech_gaps
+        gaps = detect_long_speech_gaps(
+            audio["transcript"],
+            min_gap_seconds=float(gap_cfg.get("min_gap_seconds", 20.0)),
+            video_duration=duration,
+            boundary_pct=float(gap_cfg.get("boundary_pct", 0.10)),
+        )
+        for g in gaps:
+            if _overlap(start, end, g["start"], g["end"]):
+                scores["sponsor"] += (
+                    r["sponsor"].get("long_gap_weight", 0.4) * gap_weight_scale
+                )
+                sigs_fired["sponsor"].append("long_speech_gap")
+                break
+
+    # ── NEW: coherence signals (semantic + stylistic) ──────────────────────────
+    # Each fires independently and contributes to sponsor confidence. Weights
+    # are deliberately moderate so a single coherence signal alone never
+    # dominates — at least two have to agree (or one + a structural signal).
+    for cc in audio.get("commercial_clusters", []):
+        if _overlap(start, end, cc["start"], cc["end"]):
+            scores["sponsor"] += r["sponsor"].get("commercial_cluster_weight", 1.0)
+            sigs_fired["sponsor"].append("commercial_cluster")
+            break
+
+    for aa in audio.get("audio_anomalies", []):
+        if _overlap(start, end, aa["start"], aa["end"]):
+            scores["sponsor"] += r["sponsor"].get("audio_anomaly_weight", 0.6)
+            sigs_fired["sponsor"].append("audio_style_shift")
+            break
+
+    for va in visual.get("visual_anomalies", []):
+        if _overlap(start, end, va["start"], va["end"]):
+            scores["sponsor"] += r["sponsor"].get("visual_anomaly_weight", 0.6)
+            sigs_fired["sponsor"].append("visual_style_shift")
+            break
+
+    # ── Joint novelty: STRONG sponsor signal (template-free) ──────────────────
+    # A region whose joint audio+visual+structural signature is far from the
+    # video's own baseline is, by construction, unlike the rest of the video.
+    # That is the universal property of an inserted ad; weight it
+    # accordingly. The weight is intentionally high (≥ phrase match) so a
+    # confirmed novelty region can outscore main_content on its own.
+    novelty_regions = novelty_regions or []
+    for nr in novelty_regions:
+        try:
+            ns = float(nr["start"]); ne = float(nr["end"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if _overlap(start, end, ns, ne):
+            base_w  = r["sponsor"].get("novelty_weight", 1.3)
+            score   = float(nr.get("score", 5.0))
+            # Higher score → larger contribution, capped to keep the scorer stable.
+            scaled  = base_w * (1.0 + min(0.5, max(0.0, (score - 5.0) / 10.0)))
+            scores["sponsor"] += scaled
+            sigs_fired["sponsor"].append("joint_novelty")
+            break
+
+    # ── intro ────────────────────────────────────────────────────────────────
+    if start < r["intro"]["position_window"]:
         scores["intro"] += r["intro"]["position_weight"]
         sigs_fired["intro"].append("position_near_start")
 
@@ -214,13 +392,6 @@ def _score_segment(
                 sigs_fired["sponsor"].append("ocr_detections")
                 break
 
-    for ad in visual.get("ad_intervals", []):
-        if _overlap(start, end, ad["start"], ad["end"]):
-            boost = r["sponsor"]["ad_interval_weight"] * ad.get("confidence", 0.8)
-            scores["sponsor"] += boost
-            sigs_fired["sponsor"].append("ad_intervals")
-            break
-
     # ── dead_air ─────────────────────────────────────────────────────────────
     for sil in audio.get("silence_intervals", []):
         if _overlap(start, end, sil["start"], sil["end"]):
@@ -232,13 +403,6 @@ def _score_segment(
         if _overlap(start, end, si["start"], si["end"]):
             scores["dead_air"] += r["dead_air"]["static_weight"]
             sigs_fired["dead_air"].append("static_intervals")
-            break
-
-    # Multimodal dead-air: audio silence + video static simultaneously
-    for da in visual.get("dead_air_multimodal", []) or []:
-        if _overlap(start, end, da["start"], da["end"]):
-            scores["dead_air"] += r["dead_air"].get("multimodal_dead_air_weight", 1.3)
-            sigs_fired["dead_air"].append("multimodal_dead_air")
             break
 
     if scores["dead_air"] < r["dead_air"]["min_combined_score"]:
@@ -283,9 +447,6 @@ def _build_reason(label: str, signals: list[str]) -> str:
         "static_intervals":     "static frame detected",
         "ocr_detections":       "overlay text detected",
         "duration_in_range":    "duration matches sponsor window",
-        "ad_intervals":         "audio+video 2σ discontinuity detected",
-        "multimodal_intro":     "multimodal intro pattern (distinct audio+video)",
-        "multimodal_dead_air":  "simultaneous audio silence + video static",
     }
     parts = [pretty.get(s, s) for s in dict.fromkeys(signals)]  # dedupe + order
     return f"{label.replace('_', ' ').title()}: " + "; ".join(parts)
