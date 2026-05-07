@@ -10,21 +10,31 @@ boundaries:
 scoring:
   intro:
     position_weight: 0.7         # near start is a strong signal
-    position_window: 15          # seconds from start (tightened for multimodal intro detection)
-    position_window_fallback: 240  # fallback when multimodal intro not detected
+    position_window: 240         # seconds from start (4 min max intro)
     music_weight: 0.8            # music in intro window is very likely intro
     boilerplate_intro_weight: 1.2
     ocr_logo_weight: 0.5
-    multimodal_intro_weight: 1.5  # multimodal intro detection is very reliable
 
   sponsor:
     phrase_match_weight: 1.2     # phrase match alone is very reliable
     scene_change_near_weight: 0.5
     min_duration: 15
-    max_duration: 120
-    duration_in_range_weight: 0.1
+    max_duration: 360
+    duration_in_range_weight: 0.2
     ocr_url_weight: 0.7
-    ad_interval_weight: 1.3      # multimodal island detection (already transcript-confirmed)
+    scene_burst_weight: 1.1      # rapid scene-cut burst → likely inserted ad
+    long_gap_weight: 0.4         # mid-video speech gap reinforces sponsor
+    # ── Coherence signals (Phase 1 + 2) ──
+    # Each is moderate by itself; combined with any other sponsor signal
+    # they cross the threshold. Tuned so single false positives don't promote.
+    commercial_cluster_weight: 1.0   # density of brand/url/price/CTA language
+    audio_anomaly_weight:      0.6   # spectral / loudness style shift
+    visual_anomaly_weight:     0.6   # HSV color / lighting style shift
+    # ── Joint novelty (Phase 3) ──
+    # The principled, template-free detector. A novelty region is, by
+    # construction, unlike the rest of THIS video — so the weight is high
+    # enough to dominate on its own when truly anomalous.
+    novelty_weight:            1.3
 
   outro:
     position_weight: 0.7         # near end is a strong signal
@@ -36,11 +46,91 @@ scoring:
   dead_air:
     silence_weight: 1.0
     static_weight: 0.8
-    multimodal_dead_air_weight: 1.3  # audio silence + video static simultaneously
     min_combined_score: 1.0      # silence alone is enough for dead_air
 
   main_content:
-    default_confidence: 0.60     # baseline — non-content needs strong evidence to override
+    default_confidence: 0.50     # lower baseline so non-content can beat it more easily
+
+scene_burst:
+  window_seconds: 30.0           # rolling window for cut density
+  min_cuts_in_window: 4          # baseline threshold for talking-head content
+  pad_before: 1.5                # extend burst start to capture transition
+  pad_after:  3.0                # extend burst end (ads often have audio tail)
+  adaptive_baseline: true        # auto-raise threshold on high-cut-density videos
+  baseline_multiplier: 3.0       # threshold = max(min_cuts, mult × baseline_density)
+
+speech_gap:
+  min_gap_seconds: 20.0          # mid-video speech-gap threshold
+  boundary_pct: 0.10             # exclude gaps in first/last 10% of video
+
+# Phase 1: transcript commercial-language clusters (semantic layer).
+# Detects regions with high density of brand/url/price/CTA language
+# regardless of editing structure. Catches host-read sponsorships and
+# narrative ads that scene-burst alone misses.
+commercial_cluster:
+  enabled: true
+  window_seconds: 30.0
+  min_window_score: 0.65
+  pad_before: 1.5
+  pad_after:  3.0
+  merge_gap_seconds: 8.0
+
+# Phase 2a: audio coherence (stylistic layer).
+# Flags regions whose spectral fingerprint deviates from the video's
+# baseline. Catches calm narrative ads that are recorded in a different
+# studio than the host content.
+audio_coherence:
+  enabled: true
+  window_seconds: 5.0
+  deviation_sigmas: 2.5
+  min_features_dev: 2            # >= 2 of {rms, centroid, rolloff, flatness}
+  min_duration: 6.0
+
+# Phase 2b: visual coherence (stylistic layer).
+# Flags continuous frame regions whose HSV color signature deviates from
+# the video's baseline. Catches CGI / stock-footage ads.
+visual_coherence:
+  enabled: true
+  deviation_sigmas: 2.5
+  min_duration: 6.0
+
+# Phase 3: joint-novelty detection (template-free).
+# This is the principled "is this region unlike the rest of THIS video?"
+# detector. It builds one feature vector per window from audio spectral
+# shape + color distribution + editing structure + transcript stats, then
+# emits regions whose robust-standardised joint distance is high. Acts as
+# the PRIMARY sponsor detector; the per-modality detectors above remain as
+# corroboration / safety nets.
+joint_novelty:
+  enabled: true
+  window_seconds: 5.0     # window granularity for feature aggregation
+  novelty_sigmas: 2.5     # threshold = video_median + k × MAD
+  min_duration:   8.0     # drop blips shorter than this
+  smooth_windows: 3       # rolling-median smoothing window count
+
+# Phase 3: low-confidence transcript handling.
+# Whisper is not always reliable — heavy effects, music, unfamiliar voices,
+# inserted ad audio etc. produce hallucinated text or coverage gaps. When a
+# region overlaps such low-confidence zones, the coherence promotion bar
+# drops so a single strong stylistic signal alone (audio OR visual) can
+# flag the region as a sponsor. Outside these zones the original
+# multi-vote requirement is preserved, so editorial cutaways aren't promoted.
+low_confidence_transcript:
+  enabled: true
+  avg_logprob_max:    -0.85   # Whisper avg log-prob below this = unreliable
+  no_speech_prob_min:  0.50   # Whisper "no speech" prob above this = unreliable
+  silence_pad_seconds: 4.0    # transcript coverage gaps >= this also count
+  merge_gap_seconds:   6.0    # nearby zones get merged into one
+  overlap_min:         0.5    # region must be ≥50% inside a zone to qualify
+
+# Non-content caps prevent over-detection on rapidly edited media.
+# Defaults are deliberately generous so calm interview videos behave exactly
+# as before. Stricter caps are picked automatically for animated/fast-paced
+# content (see _TYPE_PROFILES in analyzer/audio/llm_classify.py).
+non_content_cap:
+  enabled: true
+  default_max_total_pct: 0.40    # cap entire non-content fraction at 40%
+  default_max_sponsor_pct: 0.30  # sponsor sub-cap at 30%
 
 merging:
   max_gap_seconds: 3.0           # merge same-label segments within this gap

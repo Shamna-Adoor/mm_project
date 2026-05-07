@@ -1,184 +1,89 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import type { Segment, SegmentMap, SourceMetadata } from './types'
+import type { Segment, SegmentMap } from './types'
 import { LABEL_COLORS, LABEL_NAMES, formatTime, segmentStats } from './types'
-import SeekBar from './components/SeekBar'
-import Controls from './components/Controls'
-import Chapters from './components/Chapters'
-import SegmentList from './components/SegmentList'
+import SeekBar       from './components/SeekBar'
+import Controls      from './components/Controls'
+import Chapters      from './components/Chapters'
+import SegmentList   from './components/SegmentList'
 import LoadingScreen from './components/LoadingScreen'
-import ChatPanel from './components/ChatPanel'
+import ChatPanel     from './components/ChatPanel'
 
 const API = 'http://localhost:8000'
-const HLS_CDN = 'https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js'
-
-type HlsInstance = {
-  loadSource: (src: string) => void
-  attachMedia: (media: HTMLMediaElement) => void
-  destroy: () => void
-}
-
-type HlsCtor = {
-  isSupported: () => boolean
-  new(): HlsInstance
-}
-
-declare global {
-  interface Window {
-    Hls?: HlsCtor
-  }
-}
-
-let hlsScriptPromise: Promise<void> | null = null
-
-function isHlsUrl(src: string) {
-  return /\.m3u8(?:$|[?#])/i.test(src)
-}
-
-function loadHlsScript(): Promise<void> {
-  if (window.Hls) return Promise.resolve()
-  if (hlsScriptPromise) return hlsScriptPromise
-
-  hlsScriptPromise = new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = HLS_CDN
-    script.async = true
-    script.onload = () => resolve()
-    script.onerror = () => reject(new Error('Could not load HLS playback support.'))
-    document.head.appendChild(script)
-  })
-
-  return hlsScriptPromise
-}
 
 interface AnalyzeProgress {
-  percent: number
-  message: string
-  stage_num: number
+  percent:      number
+  message:      string
+  stage_num:    number
   total_stages: number
-  status: string
+  status:       string
 }
 
 type SidebarTab = 'chapters' | 'segments' | 'chat'
 
 export default function App() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const videoWrapRef = useRef<HTMLDivElement>(null)
-  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const hlsRef = useRef<HlsInstance | null>(null)
+  const videoRef      = useRef<HTMLVideoElement>(null)
+  const videoWrapRef  = useRef<HTMLDivElement>(null)
+  const pollRef       = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const [videoSrc, setVideoSrc] = useState<string | null>(null)
-  const [videoName, setVideoName] = useState('')
-  const [segmentMap, setSegmentMap] = useState<SegmentMap | null>(null)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
+  // ── Core state ────────────────────────────────────────────────────────────
+  const [videoSrc,        setVideoSrc]        = useState<string | null>(null)
+  const [videoName,       setVideoName]       = useState<string>('')
+  const [segmentMap,      setSegmentMap]      = useState<SegmentMap | null>(null)
+  const [currentTime,     setCurrentTime]     = useState(0)
+  const [duration,        setDuration]        = useState(0)
+  const [isPlaying,       setIsPlaying]       = useState(false)
   const [contentOnlyMode, setContentOnlyMode] = useState(false)
 
-  const [analyzing, setAnalyzing] = useState(false)
+  // ── Analysis state ────────────────────────────────────────────────────────
+  const [analyzing,    setAnalyzing]    = useState(false)
   const [analyzeError, setAnalyzeError] = useState<string | null>(null)
-  const [progress, setProgress] = useState<AnalyzeProgress | null>(null)
+  const [progress,     setProgress]     = useState<AnalyzeProgress | null>(null)
 
-  const [volume, setVolume] = useState(1)
-  const [muted, setMuted] = useState(false)
+  // ── Player controls ───────────────────────────────────────────────────────
+  const [volume,       setVolume]       = useState(1)
+  const [muted,        setMuted]        = useState(false)
   const [playbackRate, setPlaybackRate] = useState(1)
-  const [sidebarTab, setSidebarTab] = useState<SidebarTab>('chapters')
-  const [sourceUrl, setSourceUrl] = useState('')
-  const [urlInputOpen, setUrlInputOpen] = useState(false)
-  const [analyzeUrl, setAnalyzeUrl] = useState(true)
-  const [jobId, setJobId] = useState<string | null>(null)
-  const [sourceInfo, setSourceInfo] = useState<SourceMetadata | null>(null)
+  const [sidebarTab,   setSidebarTab]   = useState<SidebarTab>('chapters')
+  const [ytUrl,        setYtUrl]        = useState('')
+  const [ytInputOpen,  setYtInputOpen]  = useState(false)
+  const [jobId,        setJobId]        = useState<string | null>(null)
 
-  const contentOnlyRef = useRef(false)
-  const segmentMapRef = useRef<SegmentMap | null>(null)
-
-  useEffect(() => {
-    contentOnlyRef.current = contentOnlyMode
-  }, [contentOnlyMode])
-
-  useEffect(() => {
-    segmentMapRef.current = segmentMap
-  }, [segmentMap])
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !videoSrc) return
-
-    let cancelled = false
-
-    hlsRef.current?.destroy()
-    hlsRef.current = null
-    video.removeAttribute('src')
-    video.load()
-
-    const nativeHls = video.canPlayType('application/vnd.apple.mpegurl') !== ''
-
-    if (isHlsUrl(videoSrc) && !nativeHls) {
-      loadHlsScript()
-        .then(() => {
-          if (cancelled) return
-
-          const Hls = window.Hls
-          if (Hls?.isSupported()) {
-            const hls = new Hls()
-            hls.loadSource(videoSrc)
-            hls.attachMedia(video)
-            hlsRef.current = hls
-          } else {
-            video.src = videoSrc
-            video.load()
-          }
-        })
-        .catch(err => setAnalyzeError(err instanceof Error ? err.message : String(err)))
-    } else {
-      video.src = videoSrc
-      video.load()
-    }
-
-    return () => {
-      cancelled = true
-      hlsRef.current?.destroy()
-      hlsRef.current = null
-    }
-  }, [videoSrc])
+  // ── Refs for callbacks ────────────────────────────────────────────────────
+  const contentOnlyRef  = useRef(false)
+  const segmentMapRef   = useRef<SegmentMap | null>(null)
+  useEffect(() => { contentOnlyRef.current = contentOnlyMode }, [contentOnlyMode])
+  useEffect(() => { segmentMapRef.current  = segmentMap      }, [segmentMap])
 
   const currentSegment: Segment | null =
     segmentMap?.segments.find(s => currentTime >= s.start && currentTime < s.end) ?? null
 
+  // ── File upload + analysis ────────────────────────────────────────────────
   const handleVideoLoad = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-
-    if (videoSrc?.startsWith('blob:')) URL.revokeObjectURL(videoSrc)
+    if (videoSrc) URL.revokeObjectURL(videoSrc)
 
     setVideoSrc(URL.createObjectURL(file))
     setVideoName(file.name)
     setCurrentTime(0)
     setIsPlaying(false)
     setSegmentMap(null)
-    setSourceInfo(null)
-    setJobId(null)
     setAnalyzeError(null)
     setProgress(null)
-
     if (pollRef.current) clearInterval(pollRef.current)
-
     setAnalyzing(true)
 
     let jobId: string
-
     try {
       const form = new FormData()
       form.append('video', file)
-
       let res: Response
       try {
         res = await fetch(`${API}/api/analyze`, { method: 'POST', body: form })
       } catch {
         throw new Error('Cannot reach analysis server. Run "make player" first.')
       }
-
       if (!res.ok) throw new Error(await res.text())
-
       jobId = (await res.json()).job_id
       setJobId(jobId)
     } catch (err) {
@@ -192,23 +97,18 @@ export default function App() {
       try {
         const r = await fetch(`${API}/api/status/${jobId}`)
         if (!r.ok) return
-
         const p: AnalyzeProgress = await r.json()
         setProgress(p)
-
         if (p.status === 'done') {
           clearInterval(pollRef.current!)
-
           const result = await (await fetch(`${API}/api/result/${jobId}`)).json()
-
           setSegmentMap({
-            video_id: result.video_id ?? jobId,
+            video_id:         result.video_id         ?? jobId,
             duration_seconds: result.duration_seconds ?? 0,
-            generated_at: result.generated_at ?? new Date().toISOString(),
-            segments: result.segments,
-            chapters: result.chapters ?? [],
+            generated_at:     result.generated_at     ?? new Date().toISOString(),
+            segments:         result.segments,
+            chapters:         result.chapters ?? [],
           })
-
           setAnalyzing(false)
           setProgress(null)
         } else if (p.status === 'error') {
@@ -217,64 +117,38 @@ export default function App() {
           setAnalyzing(false)
           setProgress(null)
         }
-      } catch {
-        /* transient */
-      }
+      } catch { /* transient */ }
     }, 2000)
 
     e.target.value = ''
   }
 
-  const handleUrlSubmit = async (url: string) => {
+  // ── YouTube URL submit ────────────────────────────────────────────────────
+  const handleYouTubeSubmit = async (url: string) => {
     const trimmed = url.trim()
     if (!trimmed) return
-
-    setUrlInputOpen(false)
-    setSourceUrl('')
+    setYtInputOpen(false)
+    setYtUrl('')
     setSegmentMap(null)
-    setSourceInfo(null)
     setAnalyzeError(null)
     setProgress(null)
     setVideoName(trimmed)
-    setCurrentTime(0)
-    setIsPlaying(false)
-
-    if (videoSrc?.startsWith('blob:')) URL.revokeObjectURL(videoSrc)
     if (pollRef.current) clearInterval(pollRef.current)
-
-    setAnalyzing(analyzeUrl)
+    setAnalyzing(true)
 
     let jid: string
-
     try {
       const form = new FormData()
-      form.append('source_url', trimmed)
-      form.append('analyze', String(analyzeUrl))
-      form.append('stream_only', String(!analyzeUrl))
-
+      form.append('youtube_url', trimmed)
       let res: Response
       try {
-        res = await fetch(`${API}/api/import-url`, { method: 'POST', body: form })
+        res = await fetch(`${API}/api/youtube`, { method: 'POST', body: form })
       } catch {
         throw new Error('Cannot reach analysis server.')
       }
-
       if (!res.ok) throw new Error(await res.text())
-
-      const data = await res.json()
-      jid = data.job_id
-
+      jid = (await res.json()).job_id
       setJobId(jid)
-      setSourceInfo(data.source ?? null)
-      setVideoName(data.source?.title ?? trimmed)
-
-      if (data.playback_url) setVideoSrc(data.playback_url)
-
-      if (data.status === 'streaming') {
-        setAnalyzing(false)
-        setProgress(null)
-        return
-      }
     } catch (err) {
       setAnalyzeError(err instanceof Error ? err.message : String(err))
       setAnalyzing(false)
@@ -285,27 +159,20 @@ export default function App() {
       try {
         const r = await fetch(`${API}/api/status/${jid}`)
         if (!r.ok) return
-
         const p = await r.json()
         setProgress(p)
-
         if (p.status === 'done') {
           clearInterval(pollRef.current!)
-
           const result = await (await fetch(`${API}/api/result/${jid}`)).json()
-
+          // For YouTube videos, set video src to server endpoint
           setVideoSrc(`${API}/api/video/${jid}`)
-          setSourceInfo(result.source ?? null)
-
           setSegmentMap({
-            video_id: result.video_id ?? jid,
+            video_id:         result.video_id         ?? jid,
             duration_seconds: result.duration_seconds ?? 0,
-            generated_at: result.generated_at ?? new Date().toISOString(),
-            segments: result.segments,
-            chapters: result.chapters ?? [],
-            source: result.source,
+            generated_at:     result.generated_at     ?? new Date().toISOString(),
+            segments:         result.segments,
+            chapters:         result.chapters ?? [],
           })
-
           setAnalyzing(false)
           setProgress(null)
         } else if (p.status === 'error') {
@@ -314,29 +181,24 @@ export default function App() {
           setAnalyzing(false)
           setProgress(null)
         }
-      } catch {
-        /* transient */
-      }
+      } catch { /* transient */ }
     }, 2000)
   }
 
+  // ── Playback helpers ──────────────────────────────────────────────────────
   const jumpToNextContent = useCallback((fromTime: number) => {
     const segs = segmentMapRef.current?.segments
     if (!segs || !videoRef.current) return
-
     const cur = segs.find(s => fromTime >= s.start && fromTime < s.end)
     if (!cur?.skip_recommended) return
-
     const next = segs.find(s => s.start >= cur.end && !s.skip_recommended)
     videoRef.current.currentTime = next ? next.start : (segs[segs.length - 1]?.end ?? fromTime)
   }, [])
 
   const handleTimeUpdate = useCallback(() => {
     if (!videoRef.current) return
-
     const t = videoRef.current.currentTime
     setCurrentTime(t)
-
     if (contentOnlyRef.current) jumpToNextContent(t)
   }, [jumpToNextContent])
 
@@ -346,7 +208,6 @@ export default function App() {
 
   const togglePlay = useCallback(() => {
     if (!videoRef.current) return
-
     videoRef.current.paused ? videoRef.current.play() : videoRef.current.pause()
   }, [])
 
@@ -356,30 +217,16 @@ export default function App() {
 
   const skipToNextSegment = useCallback(() => {
     if (!videoRef.current || !segmentMapRef.current) return
-
-    const next = segmentMapRef.current.segments.find(
-      s => s.start > videoRef.current!.currentTime + 0.1
-    )
-
+    const next = segmentMapRef.current.segments.find(s => s.start > videoRef.current!.currentTime + 0.1)
     if (next) videoRef.current.currentTime = next.start
   }, [])
 
   const handleSeek = useCallback((t: number) => {
-    const video = videoRef.current
-    if (!video) return
-
-    const nextTime = Math.max(0, t)
-    video.currentTime = nextTime
-    setCurrentTime(nextTime)
-
-    video.play().catch(() => {
-      // Browser autoplay rules may block this until the user presses play once.
-    })
+    if (videoRef.current) videoRef.current.currentTime = t
   }, [])
 
   const handleVolumeChange = useCallback((v: number) => {
     setVolume(v)
-
     if (videoRef.current) videoRef.current.volume = v
     if (v > 0) setMuted(false)
   }, [])
@@ -393,101 +240,65 @@ export default function App() {
 
   const handlePlaybackRate = useCallback((r: number) => {
     setPlaybackRate(r)
-
     if (videoRef.current) videoRef.current.playbackRate = r
   }, [])
 
   const handleFullscreen = useCallback(() => {
     const el = videoWrapRef.current
     if (!el) return
-
     if (document.fullscreenElement) document.exitFullscreen()
     else el.requestFullscreen?.()
   }, [])
 
   const seekRelative = useCallback((delta: number) => {
     if (!videoRef.current) return
-
-    videoRef.current.currentTime = Math.max(
-      0,
-      Math.min(duration, videoRef.current.currentTime + delta)
-    )
+    videoRef.current.currentTime = Math.max(0, Math.min(duration, videoRef.current.currentTime + delta))
   }, [duration])
 
+  // ── Keyboard shortcuts ────────────────────────────────────────────────────
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) return
-
       switch (e.code) {
-        case 'Space':
-          e.preventDefault()
-          togglePlay()
-          break
-        case 'ArrowRight':
-          e.preventDefault()
-          skipToNextSegment()
-          break
-        case 'ArrowLeft':
-          e.preventDefault()
-          seekRelative(-10)
-          break
-        case 'KeyS':
-          e.preventDefault()
-          skipCurrentNonContent()
-          break
-        case 'KeyF':
-          e.preventDefault()
-          handleFullscreen()
-          break
-        case 'KeyM':
-          e.preventDefault()
-          handleToggleMute()
-          break
+        case 'Space':      e.preventDefault(); togglePlay(); break
+        case 'ArrowRight': e.preventDefault(); skipToNextSegment(); break
+        case 'ArrowLeft':  e.preventDefault(); seekRelative(-10); break
+        case 'KeyS':       e.preventDefault(); skipCurrentNonContent(); break
+        case 'KeyF':       e.preventDefault(); handleFullscreen(); break
+        case 'KeyM':       e.preventDefault(); handleToggleMute(); break
       }
     }
-
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [
-    togglePlay,
-    skipToNextSegment,
-    seekRelative,
-    skipCurrentNonContent,
-    handleFullscreen,
-    handleToggleMute,
-  ])
+  }, [togglePlay, skipToNextSegment, seekRelative, skipCurrentNonContent, handleFullscreen, handleToggleMute])
 
-  useEffect(() => () => {
-    if (pollRef.current) clearInterval(pollRef.current)
-  }, [])
+  useEffect(() => () => { if (pollRef.current) clearInterval(pollRef.current) }, [])
 
+  // ── Derived values ────────────────────────────────────────────────────────
   const effectiveDuration = duration || segmentMap?.duration_seconds || 0
   const stats = segmentMap ? segmentStats(segmentMap.segments, effectiveDuration) : null
   const isSkipSegment = currentSegment?.skip_recommended ?? false
 
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div
       className="flex flex-col h-screen overflow-hidden"
       style={{ background: '#0f172a', color: '#f1f5f9', fontFamily: 'system-ui, sans-serif' }}
     >
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header
         className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 flex-wrap"
         style={{ background: '#0f172a', borderBottom: '1px solid #1e293b' }}
       >
         <div className="flex items-center gap-2 mr-2">
-          <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
-            ▶️
-          </div>
+          <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white text-xs font-bold">▶</div>
           <span className="font-bold text-sm text-white">Content Map</span>
         </div>
 
-        <label
-          className={`cursor-pointer px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-            analyzing
-              ? 'bg-slate-700 opacity-60 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-500 text-white'
-          }`}
-        >
+        {/* Local file */}
+        <label className={`cursor-pointer px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+          analyzing ? 'bg-slate-700 opacity-60 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white'
+        }`}>
           {analyzing ? 'Analyzing…' : '+ Local File'}
           <input
             type="file"
@@ -498,64 +309,42 @@ export default function App() {
           />
         </label>
 
-        {urlInputOpen ? (
-          <div className="flex items-center gap-1 flex-wrap">
+        {/* YouTube URL */}
+        {ytInputOpen ? (
+          <div className="flex items-center gap-1">
             <input
               autoFocus
-              value={sourceUrl}
-              onChange={e => setSourceUrl(e.target.value)}
+              value={ytUrl}
+              onChange={e => setYtUrl(e.target.value)}
               onKeyDown={e => {
-                if (e.key === 'Enter') handleUrlSubmit(sourceUrl)
-                if (e.key === 'Escape') setUrlInputOpen(false)
+                if (e.key === 'Enter') handleYouTubeSubmit(ytUrl)
+                if (e.key === 'Escape') setYtInputOpen(false)
               }}
-              placeholder="YouTube, Twitch, HLS, MP4..."
-              className="text-xs rounded-lg px-2.5 py-1.5 w-72 outline-none"
-              style={{
-                background: '#1e293b',
-                border: '1px solid #3b82f6',
-                color: '#f1f5f9',
-              }}
+              placeholder="https://youtube.com/watch?v=..."
+              className="text-xs rounded-lg px-2.5 py-1.5 w-64 outline-none"
+              style={{ background: '#1e293b', border: '1px solid #3b82f6', color: '#f1f5f9' }}
             />
-
-            <label className="flex items-center gap-1.5 text-xs text-slate-400 px-1">
-              <input
-                type="checkbox"
-                checked={analyzeUrl}
-                onChange={e => setAnalyzeUrl(e.target.checked)}
-                className="accent-blue-500"
-              />
-              Segment
-            </label>
-
             <button
-              onClick={() => handleUrlSubmit(sourceUrl)}
-              disabled={!sourceUrl.trim()}
+              onClick={() => handleYouTubeSubmit(ytUrl)}
+              disabled={!ytUrl.trim()}
               className="px-2.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 disabled:opacity-40 text-white text-xs font-medium transition-colors"
             >
-              ▶️
+              ▶
             </button>
-
-            <button
-              onClick={() => setUrlInputOpen(false)}
-              className="text-slate-500 hover:text-white text-xs px-1"
-            >
-              ✕
-            </button>
+            <button onClick={() => setYtInputOpen(false)} className="text-slate-500 hover:text-white text-xs px-1">✕</button>
           </div>
         ) : (
           <button
-            onClick={() => setUrlInputOpen(true)}
+            onClick={() => setYtInputOpen(true)}
             disabled={analyzing}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-red-700 hover:bg-red-600 disabled:opacity-50 text-white transition-colors"
           >
-            <span className="text-base leading-none">▶️</span> URL / Stream
+            <span className="text-base leading-none">▶</span> YouTube
           </button>
         )}
 
         {videoName && !analyzing && (
-          <span className="text-xs text-slate-500 truncate max-w-48" title={videoName}>
-            {videoName}
-          </span>
+          <span className="text-xs text-slate-500 truncate max-w-48" title={videoName}>{videoName}</span>
         )}
 
         {analyzeError && (
@@ -573,26 +362,24 @@ export default function App() {
             <span className="text-xs text-blue-400 bg-blue-900/20 border border-blue-800/30 px-2.5 py-1 rounded-full">
               AI-powered
             </span>
-          </div>
-        )}
-
-        {sourceInfo && !segmentMap && !analyzing && (
-          <div className="ml-auto flex items-center gap-2">
-            <span className="text-xs text-cyan-300 bg-cyan-900/20 border border-cyan-800/30 px-2.5 py-1 rounded-full">
-              Streaming {sourceInfo.extractor ?? 'source'}
-            </span>
-
-            {sourceInfo.is_live && (
-              <span className="text-xs text-red-300 bg-red-900/20 border border-red-800/30 px-2.5 py-1 rounded-full">
-                Live
-              </span>
-            )}
+            <a
+              href={`${API}/api/transcript/${jobId ?? segmentMap.video_id}`}
+              download
+              className="text-xs px-3 py-1 rounded-lg font-medium bg-slate-700 hover:bg-slate-600 text-slate-200 transition-colors"
+            >
+              ↓ Transcript
+            </a>
           </div>
         )}
       </header>
 
+      {/* ── Body ───────────────────────────────────────────────────────────── */}
       <div className="flex flex-1 overflow-hidden">
+
+        {/* ── Left: video + controls ─────────────────────────────────────── */}
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+
+          {/* Video area */}
           <div
             ref={videoWrapRef}
             className="relative bg-black flex items-center justify-center flex-1 min-h-0"
@@ -600,6 +387,7 @@ export default function App() {
             {videoSrc ? (
               <video
                 ref={videoRef}
+                src={videoSrc}
                 className="max-h-full max-w-full"
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
@@ -609,13 +397,14 @@ export default function App() {
               />
             ) : (
               <div className="text-center select-none">
-                <div className="text-6xl mb-4 opacity-20">▶️</div>
+                <div className="text-6xl mb-4 opacity-20">▶</div>
                 <div className="text-sm text-slate-500">Load a video to begin</div>
                 <div className="text-xs text-slate-600 mt-1">MP4, MOV, MKV, WebM supported</div>
               </div>
             )}
 
-            {analyzing && !videoSrc && (
+            {/* Analysis progress overlay */}
+            {analyzing && (
               <LoadingScreen
                 message={progress?.message ?? 'Starting…'}
                 stageNum={progress?.stage_num ?? 0}
@@ -625,39 +414,12 @@ export default function App() {
               />
             )}
 
-            {analyzing && videoSrc && (
-              <div
-                className="absolute left-3 right-3 bottom-3 px-3 py-2 rounded-lg text-xs shadow-2xl"
-                style={{
-                  background: 'rgba(15,23,42,0.88)',
-                  border: '1px solid rgba(59,130,246,0.35)',
-                  backdropFilter: 'blur(8px)',
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-blue-300 font-medium">Segmenting</span>
-                  <span className="text-slate-400 truncate">
-                    {progress?.message ?? 'Starting analysis...'}
-                  </span>
-                  <span className="ml-auto text-blue-300 font-mono">
-                    {progress?.percent ?? 0}%
-                  </span>
-                </div>
-
-                <div className="h-1 rounded-full mt-1.5 overflow-hidden" style={{ background: '#1e293b' }}>
-                  <div
-                    className="h-full transition-all duration-500"
-                    style={{ width: `${progress?.percent ?? 0}%`, background: '#3b82f6' }}
-                  />
-                </div>
-              </div>
-            )}
-
+            {/* Non-content banner (when in a skip segment and content-only is OFF) */}
             {!analyzing && isSkipSegment && !contentOnlyMode && currentSegment && (
               <div
                 className="absolute top-3 left-3 right-3 flex items-center justify-between px-4 py-2 rounded-xl text-sm shadow-2xl"
                 style={{
-                  background: `${LABEL_COLORS[currentSegment.label].bar}22`,
+                  background: LABEL_COLORS[currentSegment.label].bar + '22',
                   border: `1px solid ${LABEL_COLORS[currentSegment.label].bar}55`,
                   backdropFilter: 'blur(8px)',
                 }}
@@ -674,7 +436,6 @@ export default function App() {
                     · ends at {formatTime(currentSegment.end)}
                   </span>
                 </div>
-
                 <button
                   onClick={skipCurrentNonContent}
                   className="text-xs px-3 py-1 rounded-lg font-semibold transition-colors hover:opacity-90"
@@ -689,6 +450,7 @@ export default function App() {
             )}
           </div>
 
+          {/* Seek bar */}
           {effectiveDuration > 0 && (
             <SeekBar
               currentTime={currentTime}
@@ -699,6 +461,7 @@ export default function App() {
             />
           )}
 
+          {/* Controls */}
           <Controls
             isPlaying={isPlaying}
             contentOnlyMode={contentOnlyMode}
@@ -724,6 +487,7 @@ export default function App() {
             onFullscreen={handleFullscreen}
           />
 
+          {/* Stats bar */}
           {stats && (
             <div
               className="flex items-center gap-4 px-4 py-2 text-xs flex-wrap"
@@ -734,13 +498,11 @@ export default function App() {
                 <span className="text-slate-400">Content</span>
                 <span className="text-white font-mono font-medium">{formatTime(stats.contentSecs)}</span>
               </div>
-
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-red-500" />
                 <span className="text-slate-400">Skip</span>
                 <span className="text-white font-mono font-medium">{formatTime(stats.skipSecs)}</span>
               </div>
-
               <div className="flex items-center gap-1.5">
                 <span className="text-slate-500">Time saved</span>
                 <span
@@ -750,7 +512,6 @@ export default function App() {
                   {stats.savedPct}%
                 </span>
               </div>
-
               <div className="ml-auto text-slate-600 hidden sm:block">
                 Space · S · ← → · M · F
               </div>
@@ -758,21 +519,18 @@ export default function App() {
           )}
         </div>
 
+        {/* ── Right sidebar ──────────────────────────────────────────────── */}
         {segmentMap && (
           <aside
             className="w-64 flex-shrink-0 flex flex-col border-l"
             style={{ background: '#0f172a', borderColor: '#1e293b' }}
           >
+            {/* Tabs */}
             <div className="flex border-b flex-shrink-0" style={{ borderColor: '#1e293b' }}>
               {[
-                {
-                  id: 'chapters',
-                  label: segmentMap.chapters?.length
-                    ? `Chaps (${segmentMap.chapters.length})`
-                    : 'Chaps',
-                },
+                { id: 'chapters', label: segmentMap.chapters?.length ? `Chaps (${segmentMap.chapters.length})` : 'Chaps' },
                 { id: 'segments', label: `Segs (${segmentMap.segments.length})` },
-                { id: 'chat', label: '💬 Chat' },
+                { id: 'chat',     label: '💬 Chat' },
               ].map(tab => (
                 <button
                   key={tab.id}
@@ -788,6 +546,7 @@ export default function App() {
               ))}
             </div>
 
+            {/* Tab content */}
             {sidebarTab === 'chapters' ? (
               segmentMap.chapters && segmentMap.chapters.length > 0 ? (
                 <Chapters

@@ -12,10 +12,17 @@ from analyzer._logging import get_logger
 log = get_logger(__name__)
 
 
-class TranscriptWord(TypedDict):
+class TranscriptWord(TypedDict, total=False):
     start: float
     end: float
     text: str
+    # Optional confidence fields (exposed when available from the recognizer).
+    # Downstream detectors use these to identify regions where the transcript
+    # is unreliable — typical for inserted ads with unfamiliar audio, music
+    # backgrounds, or non-host voices Whisper hasn't been primed on. When
+    # absent, downstream code treats the segment as "confidence unknown".
+    avg_logprob:    float
+    no_speech_prob: float
 
 
 def transcribe(
@@ -51,10 +58,23 @@ def transcribe(
     )
     log.info("Detected language: %s (%.0f%%)", info.language, info.language_probability * 100)
 
-    segments: list[TranscriptWord] = [
-        {"start": round(seg.start, 3), "end": round(seg.end, 3), "text": seg.text.strip()}
-        for seg in raw_segments  # generator — consumed once here
-    ]
+    segments: list[TranscriptWord] = []
+    for seg in raw_segments:           # generator — consumed once here
+        entry: TranscriptWord = {
+            "start": round(seg.start, 3),
+            "end":   round(seg.end,   3),
+            "text":  seg.text.strip(),
+        }
+        # faster-whisper exposes per-segment confidence proxies. They're
+        # forwarded as plain floats so all downstream consumers (including
+        # cached JSON) remain readable and version-tolerant.
+        avg_lp = getattr(seg, "avg_logprob", None)
+        if avg_lp is not None:
+            entry["avg_logprob"] = float(avg_lp)
+        no_sp = getattr(seg, "no_speech_prob", None)
+        if no_sp is not None:
+            entry["no_speech_prob"] = float(no_sp)
+        segments.append(entry)
 
     log.info("Transcription complete: %d segments", len(segments))
     _save_cache(segments, cache_path)
