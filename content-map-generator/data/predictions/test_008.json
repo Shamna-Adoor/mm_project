@@ -1,0 +1,2136 @@
+{
+  "video_id": "test_008",
+  "duration_seconds": 1731.508,
+  "generated_at": "2026-05-07T04:46:26.915512+00:00",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 133.9,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 133.9,
+      "end": 135.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.0s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 135.9,
+      "end": 168.95,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 168.95,
+      "end": 170.75,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 170.75,
+      "end": 171.95,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 171.95,
+      "end": 173.5,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 173.5,
+      "end": 176.9,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 176.9,
+      "end": 180.05,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 180.05,
+      "end": 279.6,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 279.6,
+      "end": 281.3,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 281.3,
+      "end": 285.05,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 285.05,
+      "end": 286.85,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 286.85,
+      "end": 300.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 300.75,
+      "end": 305.2,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.4s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 305.2,
+      "end": 311.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 311.75,
+      "end": 313.65,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.9s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 313.65,
+      "end": 317.05,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 317.05,
+      "end": 318.75,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 318.75,
+      "end": 333.8,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 333.8,
+      "end": 335.35,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 335.35,
+      "end": 468.1,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 468.1,
+      "end": 470.2,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.1s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 470.2,
+      "end": 476.7,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 476.7,
+      "end": 479.0,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.3s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 479.0,
+      "end": 512.7,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 512.7,
+      "end": 516.25,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 516.25,
+      "end": 535.1,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 535.1,
+      "end": 536.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 536.6,
+      "end": 579.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 579.5,
+      "end": 581.7,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 581.7,
+      "end": 598.05,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 598.05,
+      "end": 599.8,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 599.8,
+      "end": 623.45,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 623.45,
+      "end": 625.1,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 625.1,
+      "end": 627.2,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 627.2,
+      "end": 630.4,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 630.4,
+      "end": 633.85,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 633.85,
+      "end": 637.7,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 637.7,
+      "end": 642.15,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 642.15,
+      "end": 645.05,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.9s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 645.05,
+      "end": 647.8,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 647.8,
+      "end": 650.45,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 650.45,
+      "end": 653.15,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 653.15,
+      "end": 654.65,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 654.65,
+      "end": 657.7,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 657.7,
+      "end": 662.4,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (4.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 662.4,
+      "end": 664.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 664.0,
+      "end": 697.0,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "33 seconds of silence with no speech",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 697.0,
+      "end": 700.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 700.75,
+      "end": 746.0,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (9.5s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 746.0,
+      "end": 754.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 754.0,
+      "end": 773.0,
+      "label": "dead_air",
+      "confidence": 0.85,
+      "skip_recommended": true,
+      "reason": "20 seconds of silence with no speech",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 773.0,
+      "end": 780.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 780.0,
+      "end": 781.75,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 781.75,
+      "end": 783.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 783.0,
+      "end": 803.0,
+      "label": "dead_air",
+      "confidence": 0.85,
+      "skip_recommended": true,
+      "reason": "20 seconds of silence with no speech",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 803.0,
+      "end": 810.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 810.0,
+      "end": 823.0,
+      "label": "dead_air",
+      "confidence": 0.85,
+      "skip_recommended": true,
+      "reason": "13 seconds of silence with no speech",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 823.0,
+      "end": 828.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 828.0,
+      "end": 853.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "20 seconds of silence with no speech",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 853.6,
+      "end": 912.8,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 912.8,
+      "end": 945.0,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (9.6s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 945.0,
+      "end": 948.7,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 948.7,
+      "end": 950.5,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 950.5,
+      "end": 954.9,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 954.9,
+      "end": 956.55,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 956.55,
+      "end": 958.85,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 958.85,
+      "end": 960.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 960.6,
+      "end": 961.55,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 961.55,
+      "end": 978.95,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (17.4s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 978.95,
+      "end": 990.15,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 990.15,
+      "end": 993.1,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.0s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 993.1,
+      "end": 1012.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1012.75,
+      "end": 1014.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.9s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1014.6,
+      "end": 1018.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1018.5,
+      "end": 1027.5,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (9.0s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1027.5,
+      "end": 1030.95,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1030.95,
+      "end": 1035.7,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1035.7,
+      "end": 1045.95,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1045.95,
+      "end": 1049.05,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1049.05,
+      "end": 1052.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1052.5,
+      "end": 1056.1,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1056.1,
+      "end": 1057.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1057.5,
+      "end": 1059.3,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1059.3,
+      "end": 1060.7,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1060.7,
+      "end": 1071.25,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (10.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1071.25,
+      "end": 1072.45,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1072.45,
+      "end": 1083.05,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (5.0s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1083.05,
+      "end": 1094.55,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1094.55,
+      "end": 1096.35,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1096.35,
+      "end": 1099.1,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1099.1,
+      "end": 1102.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1102.6,
+      "end": 1108.55,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1108.55,
+      "end": 1110.25,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1110.25,
+      "end": 1115.55,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1115.55,
+      "end": 1117.8,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1117.8,
+      "end": 1140.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1140.75,
+      "end": 1142.5,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1142.5,
+      "end": 1161.45,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1161.45,
+      "end": 1166.7,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1166.7,
+      "end": 1173.85,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1173.85,
+      "end": 1175.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1175.6,
+      "end": 1196.55,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1196.55,
+      "end": 1198.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.0s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1198.6,
+      "end": 1203.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1203.75,
+      "end": 1206.3,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1206.3,
+      "end": 1208.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1208.75,
+      "end": 1210.55,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1210.55,
+      "end": 1211.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1211.75,
+      "end": 1215.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (4.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1215.9,
+      "end": 1218.6,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1218.6,
+      "end": 1221.4,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1221.4,
+      "end": 1222.3,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1222.3,
+      "end": 1225.05,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1225.05,
+      "end": 1229.45,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1229.45,
+      "end": 1233.0,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1233.0,
+      "end": 1234.85,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1234.85,
+      "end": 1240.95,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.9s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1240.95,
+      "end": 1242.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1242.75,
+      "end": 1245.55,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1245.55,
+      "end": 1246.85,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1246.85,
+      "end": 1269.1,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (12.2s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1269.1,
+      "end": 1271.35,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1271.35,
+      "end": 1278.95,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (7.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1278.95,
+      "end": 1280.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1280.5,
+      "end": 1289.55,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (9.0s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1289.55,
+      "end": 1293.0,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1293.0,
+      "end": 1298.7,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (5.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1298.7,
+      "end": 1310.15,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1310.15,
+      "end": 1311.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1311.9,
+      "end": 1333.8,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1333.8,
+      "end": 1338.2,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.6s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1338.2,
+      "end": 1345.65,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1345.65,
+      "end": 1363.1,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (17.4s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1363.1,
+      "end": 1363.65,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1363.65,
+      "end": 1374.45,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (10.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1374.45,
+      "end": 1377.25,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1377.25,
+      "end": 1379.5,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1379.5,
+      "end": 1390.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1390.5,
+      "end": 1392.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.4s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1392.9,
+      "end": 1394.85,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1394.85,
+      "end": 1397.45,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1397.45,
+      "end": 1399.05,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1399.05,
+      "end": 1435.2,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (36.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1435.2,
+      "end": 1436.45,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1436.45,
+      "end": 1486.35,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (9.6s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1486.35,
+      "end": 1487.45,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1487.45,
+      "end": 1492.65,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (5.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1492.65,
+      "end": 1495.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1495.5,
+      "end": 1497.05,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1497.05,
+      "end": 1513.9,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1513.9,
+      "end": 1515.4,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1515.4,
+      "end": 1516.3,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1516.3,
+      "end": 1518.35,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.0s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1518.35,
+      "end": 1519.6,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1519.6,
+      "end": 1524.85,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.9s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1524.85,
+      "end": 1541.95,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1541.95,
+      "end": 1545.4,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1545.4,
+      "end": 1546.15,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1546.15,
+      "end": 1553.75,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (5.2s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1553.75,
+      "end": 1554.35,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1554.35,
+      "end": 1556.0,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.7s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1556.0,
+      "end": 1560.3,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1560.3,
+      "end": 1566.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.5s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1566.9,
+      "end": 1567.5,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1567.5,
+      "end": 1570.75,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1570.75,
+      "end": 1571.3,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1571.3,
+      "end": 1574.8,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.5s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1574.8,
+      "end": 1577.3,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1577.3,
+      "end": 1579.45,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1579.45,
+      "end": 1581.2,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1581.2,
+      "end": 1584.6,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.4s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1584.6,
+      "end": 1585.2,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1585.2,
+      "end": 1588.55,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (3.3s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1588.55,
+      "end": 1616.55,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1616.55,
+      "end": 1622.15,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (5.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1622.15,
+      "end": 1622.75,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1622.75,
+      "end": 1624.95,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1624.95,
+      "end": 1629.15,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1629.15,
+      "end": 1630.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.8s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1630.9,
+      "end": 1671.8,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1671.8,
+      "end": 1673.95,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (2.2s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1673.95,
+      "end": 1678.35,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1678.35,
+      "end": 1679.9,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.6s)",
+      "signals_used": [
+        "audio_signals"
+      ]
+    },
+    {
+      "start": 1679.9,
+      "end": 1682.9,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1682.9,
+      "end": 1686.75,
+      "label": "dead_air",
+      "confidence": 0.9,
+      "skip_recommended": true,
+      "reason": "Silence detected (1.7s)",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    },
+    {
+      "start": 1686.75,
+      "end": 1731.508,
+      "label": "main_content",
+      "confidence": 0.6,
+      "skip_recommended": false,
+      "reason": "Content between non-content segments",
+      "signals_used": [
+        "llm_transcript"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "start": 0.0,
+      "end": 124.4,
+      "title": "Cracking the Notoriously Difficult Google Interview"
+    },
+    {
+      "start": 124.4,
+      "end": 246.4,
+      "title": "Understanding Sub-Sequence String Problem Basics"
+    },
+    {
+      "start": 246.4,
+      "end": 371.12,
+      "title": "Calculating Substrings and Comparing with List"
+    },
+    {
+      "start": 371.12,
+      "end": 491.28,
+      "title": "Hash Map Subsequence Example Explained"
+    },
+    {
+      "start": 491.28,
+      "end": 616.16,
+      "title": "Hash Map Collision Resolution"
+    },
+    {
+      "start": 616.16,
+      "end": 744.8,
+      "title": "Calculating Index Map for Optimized Solution"
+    },
+    {
+      "start": 744.8,
+      "end": 876.88,
+      "title": "Using Enumerate Function in Python Code"
+    },
+    {
+      "start": 876.88,
+      "end": 1002.4,
+      "title": "Implementing Word Index Mapping Algorithm"
+    },
+    {
+      "start": 1002.4,
+      "end": 1123.36,
+      "title": "Checking Character Existence in Hash Map"
+    },
+    {
+      "start": 1123.36,
+      "end": 1246.8,
+      "title": "Maintaining Order in String Comparisons"
+    },
+    {
+      "start": 1246.8,
+      "end": 1377.2,
+      "title": "Finding Index Character with Binary Search"
+    },
+    {
+      "start": 1377.2,
+      "end": 1507.8,
+      "title": "Implementing the Easier Solution First"
+    },
+    {
+      "start": 1507.8,
+      "end": 1633.6,
+      "title": "Calling a Function with Inputs"
+    },
+    {
+      "start": 1633.6,
+      "end": 1732.96,
+      "title": "Improving Efficiency with Binary Search"
+    }
+  ]
+}

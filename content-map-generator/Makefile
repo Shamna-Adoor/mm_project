@@ -7,25 +7,21 @@ PY       := $(VENV)/bin/python
 
 # ── Setup ─────────────────────────────────────────────────────────────────────
 
-setup: $(VENV)/bin/python
+setup: $(VENV)/bin/activate
 	@echo "✓ Virtual environment ready. Run: source .venv/bin/activate"
 
-$(VENV)/bin/python: requirements.txt
-	@if [ -d "$(VENV)" ] && [ ! -x "$(VENV)/bin/python" ]; then \
-		echo "Existing virtualenv is not runnable; recreating $(VENV)"; \
-		rm -rf "$(VENV)"; \
-	fi
+$(VENV)/bin/activate: requirements.txt
 	$(PYTHON) -m venv $(VENV)
 	$(PIP) install --upgrade pip setuptools
 	$(PIP) install --no-build-isolation -r requirements.txt
-	@touch $(VENV)/bin/python
+	@touch $(VENV)/bin/activate
 
 # ── Data ──────────────────────────────────────────────────────────────────────
 
-download-samples: $(VENV)/bin/python
+download-samples:
 	$(PY) scripts/download_sample_videos.py
 
-download-samples-force: $(VENV)/bin/python
+download-samples-force:
 	$(PY) scripts/download_sample_videos.py --force
 
 # ── Analysis ──────────────────────────────────────────────────────────────────
@@ -37,7 +33,7 @@ WHISPER_MODEL ?= base
 FORCE        ?=
 SKIP_VISUAL  ?=
 
-analyze: $(VENV)/bin/python
+analyze:
 ifndef VIDEO
 	$(error VIDEO is required. Usage: make analyze VIDEO=path/to/video.mp4)
 endif
@@ -50,7 +46,7 @@ endif
 
 VIDEO_ID ?=
 
-eval: $(VENV)/bin/python
+eval:
 ifndef VIDEO_ID
 	$(error VIDEO_ID is required. Usage: make eval VIDEO_ID=lex_fridman_ep400)
 endif
@@ -62,7 +58,7 @@ endif
 # `make player` starts both the FastAPI backend (port 8000) and Vite dev server
 # (port 5173) in parallel. Ctrl-C kills both.
 
-player: $(VENV)/bin/python
+player:
 	cd player && npm install --silent
 	bash scripts/start_player.sh
 
@@ -76,7 +72,7 @@ dist:
 	cd player && npm install --silent && npm run build
 	cd desktop && npm install --silent && npm run dist
 
-server: $(VENV)/bin/python
+server:
 	$(PY) -m uvicorn server:app --port 8000 --reload
 
 label:
@@ -84,15 +80,15 @@ label:
 
 # ── Tests ─────────────────────────────────────────────────────────────────────
 
-test: $(VENV)/bin/python
+test:
 	$(VENV)/bin/pytest tests/ -v --tb=short
 
-test-cov: $(VENV)/bin/python
+test-cov:
 	$(VENV)/bin/pytest tests/ -v --tb=short --cov=analyzer --cov=evaluation --cov-report=term-missing
 
 # ── Lint ──────────────────────────────────────────────────────────────────────
 
-lint: $(VENV)/bin/python
+lint:
 	$(VENV)/bin/python -m py_compile \
 		analyzer/_logging.py \
 		analyzer/audio/*.py \

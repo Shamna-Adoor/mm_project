@@ -14,7 +14,7 @@ log = get_logger(__name__)
 
 INTERMEDIATE_ROOT = Path(__file__).parent.parent / "data" / "intermediate"
 PREDICTIONS_ROOT  = Path(__file__).parent.parent / "data" / "predictions"
-TOTAL_STAGES      = 9
+TOTAL_STAGES      = 10
 
 
 def run_pipeline(
@@ -24,7 +24,6 @@ def run_pipeline(
     force: bool = False,
     skip_visual: bool = False,
     status_path: Path | None = None,
-    source_metadata: dict | None = None,
 ) -> Path:
     """Run the full analysis pipeline on *video_path*.
 
@@ -97,11 +96,14 @@ def run_pipeline(
         from analyzer.audio.topic_segments import generate_chapters
         chapters = generate_chapters(transcript, duration)
 
-        # ── Stages 6-9: Visual analysis ────────────────────────────────────────
+        # ── Stages 6-10: Visual + multimodal analysis ─────────────────────────
         visual_signals: dict = {
             "scene_changes":    [],
             "static_intervals": [],
             "ocr_detections":   [],
+            "ad_intervals":     [],
+            "intro_interval":   None,
+            "dead_air_multimodal": [],
         }
 
         if not skip_visual:
@@ -109,24 +111,53 @@ def run_pipeline(
             from analyzer.visual.scene_detect    import detect_scenes
             from analyzer.visual.ocr_frames      import ocr_frames
             from analyzer.visual.motion_analysis import detect_static_intervals
+            from analyzer.visual.ad_detect       import detect_ad_intervals
 
             frames_dir = idir / "frames"
 
-            # 1 frame per 5 s → ~290 frames for a 24-min video (was 1440 at 1 fps)
-            _write_status(status_path, 6, "Extracting video frames…", 71)
-            extract_frames(video_path, frames_dir, fps=0.2, force=force)
+            # 0.5 fps (1 frame per 2s) — balances detection accuracy with speed
+            _write_status(status_path, 6, "Extracting video frames…", 68)
+            extract_frames(video_path, frames_dir, fps=0.5, force=force)
 
-            _write_status(status_path, 7, "Detecting scene changes…", 75)
+            _write_status(status_path, 7, "Detecting scene changes…", 73)
             visual_signals["scene_changes"] = detect_scenes(video_path)
 
-            # OCR every 10 s on the already-sparse frames
-            _write_status(status_path, 8, "Running OCR on frames…", 82)
+            _write_status(status_path, 8, "Running OCR on frames…", 78)
             visual_signals["ocr_detections"] = ocr_frames(
                 frames_dir, sample_every_n_seconds=10
             )
 
-            _write_status(status_path, 9, "Detecting static / motion intervals…", 90)
+            _write_status(status_path, 9, "Detecting static / motion intervals…", 83)
             visual_signals["static_intervals"] = detect_static_intervals(frames_dir)
+
+            # ── Stage 10: Multimodal ad + intro + dead-air detection ────────────
+            _write_status(status_path, 10, "Multimodal ad detection (island + transcript)…", 86)
+            from analyzer.multimodal_detect import detect_multimodal_ads, detect_multimodal_dead_air
+            from analyzer.intro_detect import detect_intro
+
+            multimodal_ads = detect_multimodal_ads(
+                audio_path, frames_dir,
+                video_duration=duration,
+                transcript=transcript,
+            )
+
+            if multimodal_ads:
+                visual_signals["ad_intervals"] = multimodal_ads
+                log.info("Multimodal ad detection: %d confirmed interval(s)", len(multimodal_ads))
+            else:
+                # No multimodal ads found — leave ad_intervals empty rather than
+                # using the visual-only fallback which generates too many false positives
+                log.info("Multimodal detection found no confirmed ads")
+
+            _write_status(status_path, 10, "Detecting intro segment…", 91)
+            visual_signals["intro_interval"] = detect_intro(
+                audio_path, frames_dir, video_duration=duration
+            )
+
+            _write_status(status_path, 10, "Multimodal dead-air detection…", 93)
+            visual_signals["dead_air_multimodal"] = detect_multimodal_dead_air(
+                audio_path, frames_dir, video_duration=duration
+            )
         else:
             log.info("Visual analysis skipped (--skip-visual)")
 
@@ -140,15 +171,18 @@ def run_pipeline(
         _write_status(status_path, 9, "Fusing signals into segments…", 95)
 
         if llm_segments:
-            # LLM succeeded — overlay silence + music signals on top
+            # LLM succeeded — overlay silence + music + multimodal signals on top
             from analyzer.audio.llm_classify import to_output_segments
             segments = to_output_segments(
                 llm_segments,
                 silence_intervals=audio_signals.get("silence_intervals", []),
                 music_intervals=audio_signals.get("music_intervals", []),
+                ad_intervals=visual_signals.get("ad_intervals", []),
                 video_duration=duration,
+                intro_interval=visual_signals.get("intro_interval"),
+                dead_air_multimodal=visual_signals.get("dead_air_multimodal", []),
             )
-            log.info("Using LLM+audio segments: %d total", len(segments))
+            log.info("Using LLM+audio+multimodal segments: %d total", len(segments))
         else:
             # Ollama unavailable — fall back to rule-based fusion
             from analyzer.fusion import classify_segments
@@ -164,18 +198,6 @@ def run_pipeline(
             "segments":         segments,
             "chapters":         chapters,
         }
-        if source_metadata:
-            output["source"] = {
-                "source_url":    source_metadata.get("source_url"),
-                "webpage_url":   source_metadata.get("webpage_url"),
-                "playback_url":  source_metadata.get("playback_url"),
-                "title":         source_metadata.get("title"),
-                "extractor":     source_metadata.get("extractor"),
-                "source_id":     source_metadata.get("source_id"),
-                "is_live":       source_metadata.get("is_live", False),
-                "is_stream":     source_metadata.get("is_stream", False),
-                "mime_type":     source_metadata.get("mime_type"),
-            }
         with open(out_path, "w") as f:
             json.dump(output, f, indent=2)
 
@@ -231,13 +253,7 @@ def _probe_duration(video_path: Path) -> float:
         "-show_streams",
         str(video_path),
     ]
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    except FileNotFoundError as exc:
-        raise RuntimeError("ffprobe is not installed or not on PATH. Install ffmpeg before running analysis.") from exc
-    except subprocess.CalledProcessError as exc:
-        detail = (exc.stderr or exc.stdout or "").strip()
-        raise RuntimeError(f"ffprobe could not read video duration: {detail or video_path}") from exc
+    result = subprocess.run(cmd, capture_output=True, text=True, check=True)
     info   = json.loads(result.stdout)
     for stream in info.get("streams", []):
         if "duration" in stream:

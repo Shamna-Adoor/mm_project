@@ -10,18 +10,21 @@ boundaries:
 scoring:
   intro:
     position_weight: 0.7         # near start is a strong signal
-    position_window: 240         # seconds from start (4 min max intro)
+    position_window: 15          # seconds from start (tightened for multimodal intro detection)
+    position_window_fallback: 240  # fallback when multimodal intro not detected
     music_weight: 0.8            # music in intro window is very likely intro
     boilerplate_intro_weight: 1.2
     ocr_logo_weight: 0.5
+    multimodal_intro_weight: 1.5  # multimodal intro detection is very reliable
 
   sponsor:
     phrase_match_weight: 1.2     # phrase match alone is very reliable
     scene_change_near_weight: 0.5
     min_duration: 15
-    max_duration: 360
-    duration_in_range_weight: 0.2
+    max_duration: 120
+    duration_in_range_weight: 0.1
     ocr_url_weight: 0.7
+    ad_interval_weight: 1.3      # multimodal island detection (already transcript-confirmed)
 
   outro:
     position_weight: 0.7         # near end is a strong signal
@@ -33,10 +36,11 @@ scoring:
   dead_air:
     silence_weight: 1.0
     static_weight: 0.8
+    multimodal_dead_air_weight: 1.3  # audio silence + video static simultaneously
     min_combined_score: 1.0      # silence alone is enough for dead_air
 
   main_content:
-    default_confidence: 0.50     # lower baseline so non-content can beat it more easily
+    default_confidence: 0.60     # baseline — non-content needs strong evidence to override
 
 merging:
   max_gap_seconds: 3.0           # merge same-label segments within this gap

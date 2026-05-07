@@ -102,13 +102,19 @@ def to_output_segments(
     llm_segs: list[LLMSegment],
     silence_intervals: list[dict] | None = None,
     music_intervals:   list[dict] | None = None,
+    ad_intervals:      list[dict] | None = None,
     video_duration:    float = 0.0,
+    intro_interval:    dict | None = None,
+    dead_air_multimodal: list[dict] | None = None,
 ) -> list[Segment]:
     """Convert LLM segments → final Segment list, overlaying audio signals.
 
     Strategy
     --------
-    1. Build "forced" non-content intervals from audio signals:
+    1. Build "forced" non-content intervals from audio + multimodal signals:
+       - Multimodal intro (first 10-15s) → intro (highest priority)
+       - Multimodal ad intervals (2σ audio+video shift) → sponsor
+       - Multimodal dead air (audio silence + video static) → dead_air
        - Silence  >= 1.5 s  → dead_air
        - Music    >= 5 s near video start/end → intro / outro
     2. For every forced interval that falls inside a main_content LLM segment,
@@ -118,14 +124,54 @@ def to_output_segments(
        actual silence detected there.
     4. Convert the final list to the Segment TypedDict format.
     """
-    silence_intervals = silence_intervals or []
-    music_intervals   = music_intervals   or []
+    silence_intervals   = silence_intervals   or []
+    music_intervals     = music_intervals     or []
+    ad_intervals        = ad_intervals        or []
+    dead_air_multimodal = dead_air_multimodal or []
 
-    intro_cutoff = min(video_duration * 0.20, 300) if video_duration else 300
+    # Tighten intro cutoff when multimodal intro is detected
+    if intro_interval:
+        intro_cutoff = intro_interval["end"] + 5.0
+    else:
+        intro_cutoff = min(video_duration * 0.20, 300) if video_duration else 300
     outro_cutoff = max(video_duration - min(video_duration * 0.20, 300), 0) if video_duration else 0
 
-    # ── Step 1: collect forced intervals from audio ───────────────────────────
+    # ── Step 1: collect forced intervals from multimodal + audio signals ──────
     forced: list[dict] = []
+
+    # Multimodal intro: highest priority for first 10-15s
+    if intro_interval:
+        forced.append({
+            "start":  intro_interval["start"],
+            "end":    intro_interval["end"],
+            "label":  "intro",
+            "reason": intro_interval.get("reason", "Multimodal intro detected (distinct audio+video)"),
+            "conf":   intro_interval.get("confidence", 0.88),
+        })
+
+    # Multimodal ad intervals (2-sigma audio+video discontinuity)
+    for ad in ad_intervals:
+        dur = ad["end"] - ad["start"]
+        if dur < 15.0:
+            continue
+        forced.append({
+            "start":  ad["start"], "end": ad["end"],
+            "label":  "sponsor",
+            "reason": "Ad detected: synchronized 2σ audio+video shift",
+            "conf":   ad.get("confidence", 0.82),
+        })
+
+    # Multimodal dead air (audio silence + video static simultaneously)
+    for da in dead_air_multimodal:
+        dur = da["end"] - da["start"]
+        if dur < 2.0:
+            continue
+        forced.append({
+            "start":  da["start"], "end": da["end"],
+            "label":  "dead_air",
+            "reason": f"Dead air: audio silence + video static ({dur:.1f}s)",
+            "conf":   da.get("confidence", 0.88),
+        })
 
     for sil in silence_intervals:
         dur = sil["end"] - sil["start"]
@@ -156,7 +202,6 @@ def to_output_segments(
                 "conf":   0.78,
             })
         elif dur >= 8.0:
-            # Mid-video music break (jingle, transition sting, sponsor music)
             forced.append({
                 "start":  mi["start"], "end": mi["end"],
                 "label":  "dead_air",
@@ -259,7 +304,6 @@ def to_output_segments(
             "signals_used":      signals,
         })
 
-    result = _normalize_output_segments(result, video_duration)
     log.info(
         "to_output_segments: %d total (%d skip) from %d LLM + %d silence + %d music forced",
         len(result),
@@ -287,62 +331,6 @@ def _trim_transcript(transcript: list[dict], video_duration: float) -> str:
     combined.sort(key=lambda s: s["start"])
     note = f"[NOTE: transcript sampled — {len(combined)}/{len(transcript)} segments shown]\n"
     return note + _format_transcript(combined)
-
-
-def _normalize_output_segments(segments: list[Segment], video_duration: float) -> list[Segment]:
-    """Clamp, de-overlap, and fill tiny coverage gaps with main content."""
-    if not segments:
-        return []
-
-    duration = video_duration or max((s["end"] for s in segments), default=0.0)
-    cursor = 0.0
-    normalized: list[Segment] = []
-
-    for seg in sorted(segments, key=lambda s: (s["start"], s["end"])):
-        start = max(0.0, min(float(seg["start"]), duration))
-        end = max(0.0, min(float(seg["end"]), duration))
-        if end - start < 0.1:
-            continue
-
-        if start > cursor + 0.25:
-            normalized.append(_main_content_gap(cursor, start))
-        elif start < cursor:
-            start = cursor
-
-        if end - start < 0.1:
-            continue
-
-        fixed = dict(seg)
-        fixed["start"] = round(start, 3)
-        fixed["end"] = round(end, 3)
-        normalized.append(fixed)  # type: ignore[arg-type]
-        cursor = end
-
-    if duration - cursor > 0.25:
-        normalized.append(_main_content_gap(cursor, duration))
-
-    merged: list[Segment] = []
-    for seg in normalized:
-        if merged and merged[-1]["label"] == seg["label"] and seg["start"] - merged[-1]["end"] <= 0.25:
-            merged[-1]["end"] = seg["end"]
-            merged[-1]["confidence"] = max(merged[-1]["confidence"], seg["confidence"])
-            merged[-1]["signals_used"] = list(dict.fromkeys(merged[-1]["signals_used"] + seg["signals_used"]))
-            continue
-        merged.append(seg)
-
-    return merged
-
-
-def _main_content_gap(start: float, end: float) -> Segment:
-    return {
-        "start": round(start, 3),
-        "end": round(end, 3),
-        "label": "main_content",
-        "confidence": 0.55,
-        "skip_recommended": False,
-        "reason": "Coverage gap filled as content",
-        "signals_used": ["coverage_normalization"],
-    }
 
 
 def _format_transcript(transcript: list[dict]) -> str:

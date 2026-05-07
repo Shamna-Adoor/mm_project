@@ -70,8 +70,7 @@ make analyze VIDEO=data/videos/lex_fridman_ep400.mp4
 # 3. Open the player
 make player
 # → http://localhost:5173
-# Load a local file, or paste a YouTube/Twitch/direct media URL in the URL / Stream control.
-# Finite VOD links are downloaded + segmented; live HLS streams are played stream-only.
+# Load the video and the generated JSON via the file pickers in the UI
 
 # 4. (Optional) Hand-label a video
 make label
@@ -161,26 +160,3 @@ content-map-generator/
 | `make label` | Start the labeling tool dev server |
 | `make test` | Run pytest suite |
 | `make lint` | Syntax-check all Python modules |
-
----
-
-## URL and stream import
-
-The player can import:
-
-- Local media files (`.mp4`, `.mov`, `.mkv`, `.webm`, etc.)
-- YouTube videos and VODs supported by `yt-dlp`
-- Twitch VODs and live streams supported by `yt-dlp`
-- Direct media URLs, including `.mp4` and `.m3u8` HLS playlists
-
-Backend endpoint:
-
-```bash
-curl -X POST http://localhost:8000/api/import-url \
-  -F "source_url=https://www.youtube.com/watch?v=..." \
-  -F "analyze=true"
-```
-
-Finite videos are downloaded into `data/uploads/`, analyzed, and served back via
-`/api/video/{job_id}`. Live streams and stream-only HLS links are playable, but
-offline segmentation is not queued because there is no finite duration to segment.

@@ -90,6 +90,10 @@ def _build_boundaries(audio: dict, visual: dict, rules: dict) -> list[float]:
         if sc["confidence"] >= sc_weight:
             pts.append(sc["timestamp"])
 
+    for ad in visual.get("ad_intervals", []):
+        pts.append(ad["start"])
+        pts.append(ad["end"])
+
     min_sil = rules["boundaries"]["min_silence_duration"]
     for sil in audio.get("silence_intervals", []):
         dur = sil["end"] - sil["start"]
@@ -110,6 +114,17 @@ def _build_boundaries(audio: dict, visual: dict, rules: dict) -> list[float]:
 
     for ocr in visual.get("ocr_detections", []):
         pts.append(ocr["timestamp"])
+
+    # Multimodal intro boundary
+    intro_interval = visual.get("intro_interval")
+    if intro_interval:
+        pts.append(intro_interval["start"])
+        pts.append(intro_interval["end"])
+
+    # Multimodal dead-air boundaries
+    for da in visual.get("dead_air_multimodal", []) or []:
+        pts.append(da["start"])
+        pts.append(da["end"])
 
     return pts
 
@@ -135,7 +150,18 @@ def _score_segment(
     r = rules["scoring"]
 
     # ── intro ────────────────────────────────────────────────────────────────
-    if start < r["intro"]["position_window"]:
+    # Use tight 15s window if multimodal intro was detected, otherwise fallback
+    intro_interval = visual.get("intro_interval")
+    if intro_interval:
+        # Multimodal intro detected — strongly score segments within it
+        if _overlap(start, end, intro_interval["start"], intro_interval["end"]):
+            scores["intro"] += r["intro"].get("multimodal_intro_weight", 1.5)
+            sigs_fired["intro"].append("multimodal_intro")
+        intro_window = r["intro"]["position_window"]
+    else:
+        intro_window = r["intro"].get("position_window_fallback", r["intro"]["position_window"])
+
+    if start < intro_window:
         scores["intro"] += r["intro"]["position_weight"]
         sigs_fired["intro"].append("position_near_start")
 
@@ -188,6 +214,13 @@ def _score_segment(
                 sigs_fired["sponsor"].append("ocr_detections")
                 break
 
+    for ad in visual.get("ad_intervals", []):
+        if _overlap(start, end, ad["start"], ad["end"]):
+            boost = r["sponsor"]["ad_interval_weight"] * ad.get("confidence", 0.8)
+            scores["sponsor"] += boost
+            sigs_fired["sponsor"].append("ad_intervals")
+            break
+
     # ── dead_air ─────────────────────────────────────────────────────────────
     for sil in audio.get("silence_intervals", []):
         if _overlap(start, end, sil["start"], sil["end"]):
@@ -199,6 +232,13 @@ def _score_segment(
         if _overlap(start, end, si["start"], si["end"]):
             scores["dead_air"] += r["dead_air"]["static_weight"]
             sigs_fired["dead_air"].append("static_intervals")
+            break
+
+    # Multimodal dead-air: audio silence + video static simultaneously
+    for da in visual.get("dead_air_multimodal", []) or []:
+        if _overlap(start, end, da["start"], da["end"]):
+            scores["dead_air"] += r["dead_air"].get("multimodal_dead_air_weight", 1.3)
+            sigs_fired["dead_air"].append("multimodal_dead_air")
             break
 
     if scores["dead_air"] < r["dead_air"]["min_combined_score"]:
@@ -243,6 +283,9 @@ def _build_reason(label: str, signals: list[str]) -> str:
         "static_intervals":     "static frame detected",
         "ocr_detections":       "overlay text detected",
         "duration_in_range":    "duration matches sponsor window",
+        "ad_intervals":         "audio+video 2σ discontinuity detected",
+        "multimodal_intro":     "multimodal intro pattern (distinct audio+video)",
+        "multimodal_dead_air":  "simultaneous audio silence + video static",
     }
     parts = [pretty.get(s, s) for s in dict.fromkeys(signals)]  # dedupe + order
     return f"{label.replace('_', ' ').title()}: " + "; ".join(parts)

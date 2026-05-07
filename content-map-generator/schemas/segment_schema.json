@@ -58,32 +58,6 @@
           }
         }
       }
-    },
-    "chapters": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["start", "end", "title"],
-        "properties": {
-          "start": { "type": "number", "minimum": 0 },
-          "end": { "type": "number", "minimum": 0 },
-          "title": { "type": "string" }
-        }
-      }
-    },
-    "source": {
-      "type": "object",
-      "properties": {
-        "source_url": { "type": ["string", "null"] },
-        "webpage_url": { "type": ["string", "null"] },
-        "playback_url": { "type": ["string", "null"] },
-        "title": { "type": ["string", "null"] },
-        "extractor": { "type": ["string", "null"] },
-        "source_id": { "type": ["string", "null"] },
-        "is_live": { "type": "boolean" },
-        "is_stream": { "type": "boolean" },
-        "mime_type": { "type": ["string", "null"] }
-      }
     }
   }
 }

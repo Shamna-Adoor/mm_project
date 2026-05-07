@@ -18,8 +18,11 @@ Pillow==10.4.0
 rapidfuzz==3.9.3
 
 # Downloader
-yt-dlp>=2024.4.9
+yt-dlp==2024.4.9
 PyYAML==6.0.1
+
+# Change point detection
+ruptures>=1.1.6
 
 # Evaluation / Data
 numpy==1.26.4

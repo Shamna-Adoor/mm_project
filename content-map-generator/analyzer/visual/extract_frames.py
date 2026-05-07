@@ -33,19 +33,8 @@ def extract_frames(
 
     existing = sorted(output_dir.glob("frame_*.jpg"))
     if existing and not force:
-        expected = _expected_frame_count(video_path, fps)
-        if expected is None or len(existing) >= expected:
-            log.info("Using %d cached frames in %s", len(existing), output_dir)
-            return existing
-        log.warning(
-            "Frame cache looks incomplete (%d cached, expected about %d); regenerating.",
-            len(existing), expected,
-        )
-        for frame in existing + sorted(output_dir.glob("tmp_*.jpg")):
-            try:
-                frame.unlink()
-            except OSError:
-                pass
+        log.info("Using %d cached frames in %s", len(existing), output_dir)
+        return existing
 
     # Step 1 — extract frames named by sequential index via ffmpeg
     tmp_pattern = str(output_dir / "tmp_%08d.jpg")
@@ -72,28 +61,6 @@ def extract_frames(
 
     log.info("Extracted %d frames to %s", len(written), output_dir)
     return sorted(written)
-
-
-def _expected_frame_count(video_path: Path, fps: float) -> int | None:
-    """Estimate a lower bound for a healthy frame cache."""
-    try:
-        result = subprocess.run(
-            [
-                "ffprobe", "-v", "error",
-                "-show_entries", "format=duration",
-                "-of", "default=noprint_wrappers=1:nokey=1",
-                str(video_path),
-            ],
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-        duration = float(result.stdout.strip())
-    except Exception:
-        return None
-
-    # Allow slack for variable frame rounding and short videos.
-    return max(1, int(duration * fps * 0.65))
 
 
 if __name__ == "__main__":
