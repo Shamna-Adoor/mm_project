@@ -1,0 +1,3462 @@
+{
+  "video_id": "ytdown_youtube_the-nickname-that-has-everyone-talking-t_media_t2-3ryw45ig_001_1080p",
+  "duration_seconds": 1281.44,
+  "generated_at": "2026-05-05T21:21:47.493318+00:00",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 23.75,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 23.75,
+      "end": 24.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 24.8,
+      "end": 28.7,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 28.7,
+      "end": 29.84,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 30.05,
+      "end": 31.65,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 31.65,
+      "end": 32.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 32.7,
+      "end": 34.45,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 34.45,
+      "end": 35.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 35.5,
+      "end": 37.15,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 37.48,
+      "end": 39.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 39.45,
+      "end": 49.5,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 49.5,
+      "end": 50.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 50.6,
+      "end": 61.4,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 61.4,
+      "end": 62.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 62.65,
+      "end": 63.25,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 63.25,
+      "end": 64.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 64.25,
+      "end": 71.25,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 71.25,
+      "end": 72.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 72.3,
+      "end": 74.05,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 74.05,
+      "end": 75.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 75.45,
+      "end": 82.3,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 82.3,
+      "end": 83.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 83.55,
+      "end": 91.45,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 91.45,
+      "end": 94.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 94.2,
+      "end": 103.92,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 103.92,
+      "end": 105.25,
+      "label": "outro",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Outro: boilerplate speech detected",
+      "signals_used": [
+        "boilerplate_phrases"
+      ]
+    },
+    {
+      "start": 105.25,
+      "end": 106.72,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 106.9,
+      "end": 123.75,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 123.75,
+      "end": 125.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 125.05,
+      "end": 129.45,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 129.45,
+      "end": 131.35,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 131.35,
+      "end": 133.5,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 133.5,
+      "end": 134.56,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 134.7,
+      "end": 142.05,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 142.05,
+      "end": 143.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 143.8,
+      "end": 164.9,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 164.9,
+      "end": 166.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 166.2,
+      "end": 172.85,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 172.85,
+      "end": 173.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 173.9,
+      "end": 184.9,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 184.9,
+      "end": 186.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 186.3,
+      "end": 187.15,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 187.15,
+      "end": 188.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 188.25,
+      "end": 201.95,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 201.95,
+      "end": 203.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 203.15,
+      "end": 207.5,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 207.5,
+      "end": 208.36,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 208.65,
+      "end": 216.05,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 216.05,
+      "end": 217.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 217.3,
+      "end": 219.1,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 219.1,
+      "end": 220.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 220.65,
+      "end": 223.55,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 223.55,
+      "end": 226.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 226.5,
+      "end": 227.35,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 227.35,
+      "end": 228.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 228.85,
+      "end": 231.7,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 231.7,
+      "end": 232.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 232.9,
+      "end": 235.05,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 235.05,
+      "end": 236.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 236.4,
+      "end": 239.95,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: near video start",
+      "signals_used": [
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 239.95,
+      "end": 241.04,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 241.3,
+      "end": 262.65,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 262.65,
+      "end": 263.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 263.9,
+      "end": 269.05,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 269.05,
+      "end": 270.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 270.3,
+      "end": 273.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 273.55,
+      "end": 274.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 274.85,
+      "end": 285.85,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 285.85,
+      "end": 287.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 287.2,
+      "end": 289.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 289.9,
+      "end": 291.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 291.2,
+      "end": 296.95,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 296.95,
+      "end": 298.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 298.05,
+      "end": 317.6,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 317.6,
+      "end": 318.75,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 318.75,
+      "end": 319.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 319.25,
+      "end": 320.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 320.3,
+      "end": 322.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 322.25,
+      "end": 323.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 323.4,
+      "end": 325.04,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 325.04,
+      "end": 328.45,
+      "label": "sponsor",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Sponsor: sponsor phrase detected",
+      "signals_used": [
+        "sponsor_phrases"
+      ]
+    },
+    {
+      "start": 328.45,
+      "end": 331.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 331.05,
+      "end": 331.6,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 331.6,
+      "end": 333.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 333.15,
+      "end": 337.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 337.9,
+      "end": 339.1,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 339.1,
+      "end": 347.7,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 347.7,
+      "end": 348.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 348.7,
+      "end": 352.05,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 352.05,
+      "end": 353.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 353.15,
+      "end": 359.2,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 359.2,
+      "end": 360.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 360.5,
+      "end": 372.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 372.55,
+      "end": 373.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 373.7,
+      "end": 378.7,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 378.7,
+      "end": 380.75,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 380.75,
+      "end": 384.65,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 384.65,
+      "end": 385.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 385.85,
+      "end": 390.6,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 390.6,
+      "end": 392.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 392.8,
+      "end": 394.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 394.8,
+      "end": 398.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 398.55,
+      "end": 430.75,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 430.75,
+      "end": 431.75,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 431.75,
+      "end": 432.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 432.25,
+      "end": 433.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 433.4,
+      "end": 433.95,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 433.95,
+      "end": 435.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 435.5,
+      "end": 439.0,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 439.0,
+      "end": 440.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 440.05,
+      "end": 446.6,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 446.6,
+      "end": 449.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 449.2,
+      "end": 460.75,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 460.75,
+      "end": 463.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: static frame detected; silence detected",
+      "signals_used": [
+        "static_intervals",
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 463.7,
+      "end": 489.35,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 489.35,
+      "end": 490.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 490.6,
+      "end": 498.05,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 498.05,
+      "end": 500.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 500.45,
+      "end": 501.7,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 501.7,
+      "end": 502.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 502.9,
+      "end": 504.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 504.9,
+      "end": 506.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 506.15,
+      "end": 507.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 507.25,
+      "end": 508.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 508.6,
+      "end": 510.4,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 510.4,
+      "end": 511.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 511.55,
+      "end": 524.1,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 524.1,
+      "end": 525.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 525.4,
+      "end": 527.05,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 527.05,
+      "end": 528.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 528.15,
+      "end": 533.65,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 533.65,
+      "end": 534.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 534.85,
+      "end": 536.45,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 536.45,
+      "end": 538.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 538.05,
+      "end": 538.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 538.8,
+      "end": 540.35,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 540.35,
+      "end": 576.1,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 576.1,
+      "end": 577.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 577.2,
+      "end": 586.1,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 586.1,
+      "end": 588.75,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 588.75,
+      "end": 590.45,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 590.45,
+      "end": 591.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 591.8,
+      "end": 593.7,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 593.7,
+      "end": 595.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 595.15,
+      "end": 599.6,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 599.6,
+      "end": 601.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 601.55,
+      "end": 602.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 602.8,
+      "end": 604.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 604.05,
+      "end": 614.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 614.8,
+      "end": 616.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 616.4,
+      "end": 619.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 619.9,
+      "end": 621.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 621.05,
+      "end": 621.85,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 621.85,
+      "end": 623.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 623.25,
+      "end": 624.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 624.25,
+      "end": 627.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 627.85,
+      "end": 629.75,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 629.75,
+      "end": 631.35,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 631.35,
+      "end": 634.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 634.55,
+      "end": 635.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 635.9,
+      "end": 639.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 639.55,
+      "end": 640.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 640.7,
+      "end": 641.95,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 641.95,
+      "end": 643.1,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 643.1,
+      "end": 644.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 644.55,
+      "end": 645.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 645.85,
+      "end": 647.4,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 647.4,
+      "end": 648.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 648.65,
+      "end": 649.85,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 649.85,
+      "end": 651.75,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 651.75,
+      "end": 653.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 653.8,
+      "end": 656.0,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 656.0,
+      "end": 661.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 661.9,
+      "end": 663.0,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 663.0,
+      "end": 674.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 674.55,
+      "end": 675.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 675.9,
+      "end": 688.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 688.55,
+      "end": 689.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 689.8,
+      "end": 707.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 707.25,
+      "end": 708.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 708.3,
+      "end": 718.3,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 718.3,
+      "end": 719.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 719.45,
+      "end": 726.2,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 726.2,
+      "end": 728.05,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 728.05,
+      "end": 730.35,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 730.35,
+      "end": 731.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 731.55,
+      "end": 735.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 735.9,
+      "end": 736.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 736.9,
+      "end": 762.4,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 762.4,
+      "end": 764.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 764.3,
+      "end": 768.15,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 768.15,
+      "end": 769.35,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 769.35,
+      "end": 776.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 776.25,
+      "end": 777.75,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 777.75,
+      "end": 783.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 783.8,
+      "end": 785.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 785.2,
+      "end": 789.0,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 789.0,
+      "end": 790.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 790.25,
+      "end": 800.65,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 800.65,
+      "end": 801.28,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 801.75,
+      "end": 803.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 803.25,
+      "end": 804.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 804.85,
+      "end": 806.35,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 806.35,
+      "end": 807.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 807.5,
+      "end": 810.75,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 810.75,
+      "end": 811.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 811.8,
+      "end": 812.3,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 812.3,
+      "end": 813.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 813.5,
+      "end": 825.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 825.55,
+      "end": 826.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 826.8,
+      "end": 830.1,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 830.1,
+      "end": 831.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 831.65,
+      "end": 833.15,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 833.15,
+      "end": 834.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 834.3,
+      "end": 834.85,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 834.85,
+      "end": 838.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 838.9,
+      "end": 844.3,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 844.3,
+      "end": 845.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 845.4,
+      "end": 849.3,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 849.3,
+      "end": 851.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 851.6,
+      "end": 854.45,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 854.45,
+      "end": 857.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: static frame detected; silence detected",
+      "signals_used": [
+        "static_intervals",
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 857.4,
+      "end": 859.5,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 859.5,
+      "end": 863.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 863.5,
+      "end": 866.15,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 866.15,
+      "end": 868.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 868.15,
+      "end": 877.15,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 877.15,
+      "end": 879.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 879.4,
+      "end": 882.75,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 882.75,
+      "end": 884.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 884.65,
+      "end": 888.9,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 888.9,
+      "end": 890.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 890.6,
+      "end": 894.2,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 894.2,
+      "end": 897.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 897.3,
+      "end": 899.25,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 899.25,
+      "end": 900.35,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 900.35,
+      "end": 905.5,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 905.5,
+      "end": 906.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 906.55,
+      "end": 911.95,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 911.95,
+      "end": 913.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 913.15,
+      "end": 920.15,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 920.15,
+      "end": 921.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 921.4,
+      "end": 927.1,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 927.1,
+      "end": 928.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 928.7,
+      "end": 944.4,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 944.4,
+      "end": 945.6,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 945.6,
+      "end": 949.45,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 949.45,
+      "end": 950.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 950.65,
+      "end": 961.0,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 961.0,
+      "end": 961.92,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 962.05,
+      "end": 963.55,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 963.55,
+      "end": 965.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 965.2,
+      "end": 968.8,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 968.8,
+      "end": 969.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 969.9,
+      "end": 973.7,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 973.7,
+      "end": 974.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 974.7,
+      "end": 975.4,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 975.4,
+      "end": 976.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 976.45,
+      "end": 977.52,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 977.52,
+      "end": 981.55,
+      "label": "sponsor",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Sponsor: sponsor phrase detected",
+      "signals_used": [
+        "sponsor_phrases"
+      ]
+    },
+    {
+      "start": 981.55,
+      "end": 982.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 982.65,
+      "end": 1027.45,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 1027.45,
+      "end": 1028.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1028.5,
+      "end": 1030.65,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 1030.65,
+      "end": 1031.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1031.65,
+      "end": 1047.4,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1047.4,
+      "end": 1048.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1048.4,
+      "end": 1050.95,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1050.95,
+      "end": 1053.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1053.25,
+      "end": 1055.8,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1055.8,
+      "end": 1057.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1057.85,
+      "end": 1058.55,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1058.55,
+      "end": 1061.12,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1061.55,
+      "end": 1064.05,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1064.05,
+      "end": 1066.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1066.45,
+      "end": 1070.05,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1070.05,
+      "end": 1072.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1072.5,
+      "end": 1079.55,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1079.55,
+      "end": 1081.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1081.2,
+      "end": 1083.35,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1083.35,
+      "end": 1084.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1084.55,
+      "end": 1088.25,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1088.25,
+      "end": 1090.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 1090.45,
+      "end": 1094.85,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1094.85,
+      "end": 1096.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1096.2,
+      "end": 1125.35,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1125.35,
+      "end": 1126.35,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1126.35,
+      "end": 1141.4,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1141.4,
+      "end": 1143.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1143.4,
+      "end": 1145.1,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1145.1,
+      "end": 1148.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 1148.5,
+      "end": 1150.35,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1150.35,
+      "end": 1151.65,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 1151.65,
+      "end": 1152.3,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1152.3,
+      "end": 1154.55,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: static frame detected; silence detected",
+      "signals_used": [
+        "static_intervals",
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1154.55,
+      "end": 1156.25,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1156.25,
+      "end": 1157.3,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1157.3,
+      "end": 1169.2,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1169.2,
+      "end": 1170.2,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1170.2,
+      "end": 1176.95,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1176.95,
+      "end": 1178.45,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1178.45,
+      "end": 1181.75,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1181.75,
+      "end": 1182.8,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1182.8,
+      "end": 1186.3,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1186.3,
+      "end": 1188.15,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1188.15,
+      "end": 1200.05,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1200.05,
+      "end": 1202.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1202.7,
+      "end": 1206.45,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1206.45,
+      "end": 1213.5,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1213.5,
+      "end": 1214.75,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1214.75,
+      "end": 1216.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1216.85,
+      "end": 1228.75,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1228.75,
+      "end": 1229.85,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1229.85,
+      "end": 1231.95,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1231.95,
+      "end": 1234.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1234.25,
+      "end": 1238.7,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1238.7,
+      "end": 1239.9,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1239.9,
+      "end": 1240.6,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1240.6,
+      "end": 1241.95,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1241.95,
+      "end": 1246.95,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1246.95,
+      "end": 1250.4,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1250.4,
+      "end": 1253.95,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1253.95,
+      "end": 1256.7,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    },
+    {
+      "start": 1256.7,
+      "end": 1279.0,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1279.0,
+      "end": 1281.44,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected",
+      "signals_used": [
+        "silence_intervals"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "start": 0.0,
+      "end": 122.32,
+      "title": "Part 1"
+    },
+    {
+      "start": 122.32,
+      "end": 243.52,
+      "title": "Part 2"
+    },
+    {
+      "start": 243.52,
+      "end": 365.2,
+      "title": "Part 3"
+    },
+    {
+      "start": 365.2,
+      "end": 485.44,
+      "title": "Part 4"
+    },
+    {
+      "start": 485.44,
+      "end": 607.28,
+      "title": "Part 5"
+    },
+    {
+      "start": 607.28,
+      "end": 730.4,
+      "title": "Part 6"
+    },
+    {
+      "start": 730.4,
+      "end": 854.56,
+      "title": "Part 7"
+    },
+    {
+      "start": 854.56,
+      "end": 975.36,
+      "title": "Part 8"
+    },
+    {
+      "start": 975.36,
+      "end": 1096.56,
+      "title": "Part 9"
+    },
+    {
+      "start": 1096.56,
+      "end": 1218.08,
+      "title": "Part 10"
+    },
+    {
+      "start": 1218.08,
+      "end": 1268.4,
+      "title": "Part 11"
+    }
+  ]
+}

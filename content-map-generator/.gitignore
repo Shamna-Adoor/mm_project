@@ -1,0 +1,17 @@
+data/videos/
+data/intermediate/
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.DS_Store
+.env
+*.wav
+*.mp3
+*.mp4
+*.mkv
+*.webm

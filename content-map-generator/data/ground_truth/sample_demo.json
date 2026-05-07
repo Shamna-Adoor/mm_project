@@ -1,0 +1,61 @@
+{
+  "video_id": "sample_demo",
+  "duration_seconds": 3600,
+  "generated_at": "2026-04-30T00:00:00Z",
+  "segments": [
+    {
+      "start": 0,
+      "end": 45,
+      "label": "intro",
+      "confidence": 0.95,
+      "skip_recommended": true,
+      "reason": "Music + logo animation at video start",
+      "signals_used": ["music_intervals", "boilerplate_phrases"]
+    },
+    {
+      "start": 45,
+      "end": 600,
+      "label": "main_content",
+      "confidence": 0.80,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 600,
+      "end": 660,
+      "label": "sponsor",
+      "confidence": 0.92,
+      "skip_recommended": true,
+      "reason": "Sponsor phrase detected: 'this episode is brought to you by'",
+      "signals_used": ["sponsor_phrases", "scene_changes"]
+    },
+    {
+      "start": 660,
+      "end": 3520,
+      "label": "main_content",
+      "confidence": 0.80,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 3520,
+      "end": 3545,
+      "label": "dead_air",
+      "confidence": 0.88,
+      "skip_recommended": true,
+      "reason": "Silence + static frame detected",
+      "signals_used": ["silence_intervals", "static_intervals"]
+    },
+    {
+      "start": 3545,
+      "end": 3600,
+      "label": "outro",
+      "confidence": 0.90,
+      "skip_recommended": true,
+      "reason": "Outro phrase + subscribe OCR near video end",
+      "signals_used": ["boilerplate_phrases", "ocr_detections", "music_intervals"]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+# Videos to download for development and testing.
+# Format: each entry has a url, a friendly id, and optional notes.
+# Run: python scripts/download_sample_videos.py
+
+videos:
+  - id: lex_fridman_ep400
+    url: https://www.youtube.com/watch?v=w3zbiaoZlJU
+    notes: "Lex Fridman podcast — long interview format, known sponsorships"
+
+  - id: mit_ocw_lecture
+    url: https://www.youtube.com/watch?v=ZK3O402wf1c
+    notes: "MIT OpenCourseWare lecture — academic, no sponsors, clear intro/outro"
+
+  - id: huberman_lab_ep1
+    url: https://www.youtube.com/watch?v=X0vsQAFfpbE
+    notes: "Huberman Lab — heavy sponsor blocks, chapter markers"
+
+  - id: veritasium_sample
+    url: https://www.youtube.com/watch?v=HeQX2HjkcNo
+    notes: "Veritasium explainer — mid-roll sponsor read, music intro"
+
+  - id: stanford_lecture_cs229
+    url: https://www.youtube.com/watch?v=jGwO_UgTS7I
+    notes: "Stanford CS229 — long lecture, minimal non-content"
+
+output_dir: data/videos
+format: "mp4"
+max_height: 720   # cap resolution to keep file sizes manageable

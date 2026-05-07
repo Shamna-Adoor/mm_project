@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Hourglass sand particles ─────────────────────────────────────────── */
+@keyframes sandDrop {
+  0%   { transform: translateY(0px);  opacity: 0; }
+  5%   { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(52px); opacity: 0; }
+}
+
+@keyframes sandAccum {
+  0%   { transform: scaleX(0.2); opacity: 0; }
+  50%  { opacity: 0.8; }
+  100% { transform: scaleX(1);   opacity: 0.6; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 8px #3b82f688); }
+  50%       { filter: drop-shadow(0 0 10px #06b6d4) drop-shadow(0 0 20px #06b6d455); }
+}
+
+@keyframes orbitDot {
+  from { transform: rotate(var(--start-deg)) translateX(52px) rotate(calc(0deg - var(--start-deg))); }
+  to   { transform: rotate(calc(var(--start-deg) + 360deg)) translateX(52px) rotate(calc(0deg - var(--start-deg) - 360deg)); }
+}
+
+@keyframes scanSweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes factFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes countDown {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+.sand-particle { animation: sandDrop 2.2s ease-in infinite; }
+.hourglass-glow { animation: glowPulse 2s ease-in-out infinite; }
+.fact-card { animation: factFadeIn 0.6s ease forwards; }
+
+.shimmer-text {
+  background: linear-gradient(90deg, #94a3b8 25%, #e2e8f0 50%, #94a3b8 75%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}

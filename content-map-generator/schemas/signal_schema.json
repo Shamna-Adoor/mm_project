@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SignalMap",
+  "description": "Intermediate analyzer output: raw signals before fusion.",
+  "type": "object",
+  "required": ["video_id", "audio_signals", "visual_signals"],
+  "properties": {
+    "video_id": {
+      "type": "string"
+    },
+    "audio_signals": {
+      "type": "object",
+      "properties": {
+        "silence_intervals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["start", "end", "energy"],
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "energy": { "type": "number" }
+            }
+          }
+        },
+        "music_intervals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["start", "end", "confidence"],
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "transcript": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["start", "end", "text"],
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        "sponsor_phrases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["start", "end", "phrase", "context"],
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "phrase": { "type": "string" },
+              "context": { "type": "string" }
+            }
+          }
+        },
+        "boilerplate_phrases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["start", "end", "phrase", "type"],
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "phrase": { "type": "string" },
+              "type": { "type": "string", "enum": ["intro", "outro", "cta"] }
+            }
+          }
+        }
+      }
+    },
+    "visual_signals": {
+      "type": "object",
+      "properties": {
+        "scene_changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "confidence"],
+            "properties": {
+              "timestamp": { "type": "number" },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "static_intervals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["start", "end", "motion_score"],
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "motion_score": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "ocr_detections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "text", "bbox"],
+            "properties": {
+              "timestamp": { "type": "number" },
+              "text": { "type": "string" },
+              "bbox": {
+                "type": "array",
+                "items": { "type": "number" },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "content-map-player",
+  "version": "1.0.0",
+  "description": "Multimodal video content map player",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "edu.usc.content-map-player",
+    "productName": "Content Map Player",
+    "directories": { "output": "../dist-electron" },
+    "files": [
+      "main.js",
+      { "from": "../player/dist", "to": "player/dist" },
+      { "from": "../data",        "to": "data",          "filter": ["uploads/.gitkeep","intermediate/.gitkeep","predictions/.gitkeep"] },
+      { "from": "../analyzer",    "to": "analyzer" },
+      { "from": "../server.py",   "to": "server.py" },
+      { "from": "../.venv",       "to": ".venv" }
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.video"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}

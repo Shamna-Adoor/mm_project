@@ -1,0 +1,161 @@
+{
+  "video_id": "yt_ttwe3pbhp0a",
+  "duration_seconds": 1474.833,
+  "generated_at": "2026-05-05T20:56:37.886707+00:00",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 240.033,
+      "label": "intro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Intro: boilerplate speech detected; near video start",
+      "signals_used": [
+        "boilerplate_phrases",
+        "position_near_start"
+      ]
+    },
+    {
+      "start": 240.033,
+      "end": 991.0,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 991.0,
+      "end": 1000.033,
+      "label": "intro",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Intro: boilerplate speech detected",
+      "signals_used": [
+        "boilerplate_phrases"
+      ]
+    },
+    {
+      "start": 1000.033,
+      "end": 1220.0,
+      "label": "main_content",
+      "confidence": 0.5,
+      "skip_recommended": false,
+      "reason": "Default classification",
+      "signals_used": []
+    },
+    {
+      "start": 1220.0,
+      "end": 1380.0,
+      "label": "outro",
+      "confidence": 0.7,
+      "skip_recommended": true,
+      "reason": "Outro: near video end",
+      "signals_used": [
+        "position_near_end"
+      ]
+    },
+    {
+      "start": 1380.45,
+      "end": 1384.25,
+      "label": "dead_air",
+      "confidence": 1.0,
+      "skip_recommended": true,
+      "reason": "Dead Air: silence detected; static frame detected",
+      "signals_used": [
+        "silence_intervals",
+        "static_intervals"
+      ]
+    },
+    {
+      "start": 1384.25,
+      "end": 1474.833,
+      "label": "outro",
+      "confidence": 0.85,
+      "skip_recommended": true,
+      "reason": "Outro: boilerplate speech detected; near video end",
+      "signals_used": [
+        "boilerplate_phrases",
+        "position_near_end"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "start": 0.0,
+      "end": 122.0,
+      "title": "Part 1"
+    },
+    {
+      "start": 122.0,
+      "end": 244.0,
+      "title": "Part 2"
+    },
+    {
+      "start": 244.0,
+      "end": 366.0,
+      "title": "Part 3"
+    },
+    {
+      "start": 366.0,
+      "end": 488.0,
+      "title": "Part 4"
+    },
+    {
+      "start": 488.0,
+      "end": 609.0,
+      "title": "Part 5"
+    },
+    {
+      "start": 609.0,
+      "end": 729.0,
+      "title": "Part 6"
+    },
+    {
+      "start": 729.0,
+      "end": 850.0,
+      "title": "Part 7"
+    },
+    {
+      "start": 850.0,
+      "end": 972.0,
+      "title": "Part 8"
+    },
+    {
+      "start": 972.0,
+      "end": 1098.0,
+      "title": "Part 9"
+    },
+    {
+      "start": 1098.0,
+      "end": 1218.0,
+      "title": "Part 10"
+    },
+    {
+      "start": 1218.0,
+      "end": 1338.0,
+      "title": "Part 11"
+    },
+    {
+      "start": 1338.0,
+      "end": 1461.0,
+      "title": "Part 12"
+    },
+    {
+      "start": 1461.0,
+      "end": 1475.0,
+      "title": "Part 13"
+    }
+  ],
+  "source": {
+    "source_url": "https://www.youtube.com/watch?v=tTWE3pBhP0A",
+    "webpage_url": "https://www.youtube.com/watch?v=tTWE3pBhP0A",
+    "playback_url": "https://rr2---sn-a5msenek.googlevideo.com/videoplayback?expire=1778036029&ei=3Vj6aevaDKWQsfIP4MymmQk&ip=2603%3A8002%3A42f0%3A8b70%3Add65%3A8f63%3Ade47%3A980a&id=o-AAdafrjQlGW2jDdRBZVqzzmDH147c7ndYrE7Sv8Px3PB&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=296&met=1778014429%2C&mh=6L&mm=31%2C26&mn=sn-a5msenek%2Csn-q4fl6ndz&ms=au%2Conr&mv=m&mvi=2&pl=33&rms=au%2Cau&initcwndbps=3285000&bui=AbKmrwoMdCZUjmCInqokMblkGnVbOBu5vXEV0sgZnDk2Xukm5Fj5fFfmdn5Pd2yTr_hEgywFnGNRqpzG&spc=96Xrvxf3fltenqx8PVbmzbzLXW8pQIrRWjmYU3MBL4Lk1IO7UGFU&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=21313972&ratebypass=yes&dur=1474.977&lmt=1749493391505089&mt=1778013908&fvip=5&fexp=51565115%2C51565682&c=ANDROID_VR&txp=6309224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AHEqNM4wRQIgXZfliwUrg-0cipplzoV5Ok1sOqup-g4Xpp-KYw0KTfsCIQD5rG_s3oqjHYfj0h0X65NaEGh-d2cqwJIFjTlyW97vUg%3D%3D&lsparams=cps%2Cmet%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRQIhAMubWqWrmyfGxvf-0BRXSUSsbQZh4H63gG8QM0oi9kODAiBPygSngSr3wgdVJAkuEl7SS-rcwAJSBPQlFwkT-kfqNw%3D%3D",
+    "title": "Morning Rituals That Shape My Day | 20 Minutes | English Podcast",
+    "extractor": "Youtube",
+    "source_id": "tTWE3pBhP0A",
+    "is_live": false,
+    "is_stream": false,
+    "mime_type": "video/mp4"
+  }
+}
